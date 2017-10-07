@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using RPG.Objects;
 using System.Text;
@@ -10,7 +11,7 @@ namespace RPG
 {
     public static class Level
     {
-        enum LoadID
+        private enum LoadID
         {
             None,
             Player,
@@ -29,10 +30,13 @@ namespace RPG
             Entrance.Entrances.Clear();
             Door.Doors.Clear();
             Key.Keys.Clear();
+            FormOverworld.Instance.Controls.Clear();
         }
 
         public static void LoadLevel(int levelID)
         {
+            ClearLevel();
+            FormOverworld.Instance.Text = $"RPG - Level {levelID}";
             LoadID loadID = LoadID.None;
 
             foreach (string line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelID}.lvl"))
@@ -41,36 +45,38 @@ namespace RPG
                 {
                     case "[PLAYER]":
                         loadID = LoadID.Player;
-                        goto end;
+                        continue;
                     case "[ENEMY]":
                         loadID = LoadID.Enemy;
-                        goto end;
+                        continue;
                     case "[WALL]":
                         loadID = LoadID.Wall;
-                        goto end;
+                        continue;
                     case "[GRASS]":
                         loadID = LoadID.Grass;
-                        goto end;
+                        continue;
                     case "[ENTRANCE]":
                         loadID = LoadID.Entrance;
-                        goto end;
+                        continue;
                     case "[DOOR]":
                         loadID = LoadID.Door;
-                        goto end;
+                        continue;
                     case "[KEY]":
                         loadID = LoadID.Key;
-                        goto end;
+                        continue;
                 }
 
                 string[] temp = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 switch (loadID)
                 {
                     case LoadID.Player:
-                        throw new NotImplementedException();
+                        FormOverworld.Instance.Controls.Remove(FormOverworld.OverworldPlayer);
+                        FormOverworld.OverworldPlayer = new OverworldPlayer(int.Parse(temp[0]), int.Parse(temp[1]));
+                        FormOverworld.Instance.Controls.Add(FormOverworld.OverworldPlayer);
+                        break;
                     case LoadID.Enemy:
                         throw new NotImplementedException();
                     case LoadID.Wall:
-                        
                         new Wall(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]));
                         break;
                     case LoadID.Grass:
@@ -106,9 +112,6 @@ namespace RPG
                 {
                     FormOverworld.Instance.Controls.Add(key);
                 }
-
-                end:
-                ;
             }
         }
     }

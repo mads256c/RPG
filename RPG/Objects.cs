@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RPG.Properties;
 
 namespace RPG.Objects
 {
@@ -51,11 +52,12 @@ namespace RPG.Objects
     {
         public static List<Entrance> Entrances = new List<Entrance>();
 
-        public int Level;
+        public int LevelID;
         public Rectangle Bounds;
 
-        public Entrance(int x1, int y1, int x2, int y2, int level)
+        public Entrance(int x1, int y1, int x2, int y2, int levelID)
         {
+            LevelID = levelID;
             Bounds.Location = new Point(x1, y1);
             Bounds.Size = new Size(x2 - x1, y2 - y1);
             Entrances.Add(this);
@@ -63,7 +65,13 @@ namespace RPG.Objects
 
         public bool Intersects(Rectangle bounds)
         {
-            return Bounds.IntersectsWith(bounds);
+            if (Bounds.IntersectsWith(bounds))
+            {
+                Level.LoadLevel(LevelID);
+                return true;
+            }
+            return false;
+
         }
     }
 
@@ -74,22 +82,15 @@ namespace RPG.Objects
         public int ID;
 
         public bool Open {
-            get { return open; }
+            get => _open;
             set
             {
-                if (value)
-                {
-                    BackColor = Color.Transparent;
-                }
-                else
-                {
-                    BackColor = Color.SaddleBrown;
-                }
-                open = value;
+                Visible = !value;
+                _open = value;
             }
         }
 
-        private bool open = false;
+        private bool _open = false;
 
         public Door(int x1,int y1, int x2, int y2, int id) : base()
         {
@@ -125,15 +126,20 @@ namespace RPG.Objects
 
         public bool Intersects(Rectangle bounds)
         {
-            if (Bounds.IntersectsWith(bounds))
+            if (Bounds.IntersectsWith(bounds) && Visible)
             {
                 foreach (var door in Door.Doors)
                 {
                     if (door.ID == ID)
                         door.Open = true;
                 }
+                FormOverworld.SoundPlayer.Stream = Resources.testsound;
+                FormOverworld.SoundPlayer.Play();
+                Visible = false;
                 return true;
             }
-            return false;}
+            return false;
+            
+        }
     }
 }
