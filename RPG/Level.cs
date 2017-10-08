@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using RPG.Objects;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace RPG
