@@ -11,6 +11,8 @@ namespace RPG
 {
     public static class Level
     {
+        public static int LoadedLevel;
+
         private enum LoadID
         {
             None,
@@ -36,7 +38,9 @@ namespace RPG
         public static void LoadLevel(int levelID)
         {
             ClearLevel();
+            Logger.WriteLine($"Changed level to: {levelID}");
             FormOverworld.Instance.Text = $"RPG - Level {levelID}";
+            LoadedLevel = levelID;
             LoadID loadID = LoadID.None;
 
             foreach (string line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelID}.lvl"))

@@ -1,18 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RPG.Objects;
 using RPG.Properties;
 
 namespace RPG
 {
-    public class OverworldPlayer : PictureBox
+    public static class Player
+    {
+        public static string Name;
+
+        public static int Health => Level * 15 + Defence + 5;
+        public static int MP => Wisdom * 10;
+
+        public static int Level;
+        public static int XP;
+        public static int XPNeeded => Level * 100;
+
+        public static int Strength;
+        public static int Wisdom;
+        public static int Speed;
+
+        public static int Defence;
+        public static int Resistance;
+    }
+
+
+    public sealed class OverworldPlayer : PictureBox
     {
         public int Speed;
 

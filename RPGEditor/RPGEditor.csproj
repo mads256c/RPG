@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CB2ED79-801A-4D56-8E83-7CFB7F3C8894}</ProjectGuid>
+    <ProjectGuid>{5C1EFF46-E20E-44A4-9581-AC3DF5E5B68C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>RPG</RootNamespace>
-    <AssemblyName>RPG</AssemblyName>
+    <RootNamespace>RPGEditor</RootNamespace>
+    <AssemblyName>RPGEditor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,60 +45,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities.cs" />
-    <Compile Include="FormDebug.cs">
+    <Compile Include="FormEditObject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDebug.Designer.cs">
-      <DependentUpon>FormDebug.cs</DependentUpon>
+    <Compile Include="FormEditObject.Designer.cs">
+      <DependentUpon>FormEditObject.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOverworld.cs">
+    <Compile Include="FormEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOverworld.Designer.cs">
-      <DependentUpon>FormOverworld.cs</DependentUpon>
+    <Compile Include="FormEditor.Designer.cs">
+      <DependentUpon>FormEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStart.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormStart.Designer.cs">
-      <DependentUpon>FormStart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Level.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="Objects.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormDebug.resx">
-      <DependentUpon>FormDebug.cs</DependentUpon>
+    <EmbeddedResource Include="FormEditObject.resx">
+      <DependentUpon>FormEditObject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOverworld.resx">
-      <DependentUpon>FormOverworld.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormStart.resx">
-      <DependentUpon>FormStart.cs</DependentUpon>
+    <EmbeddedResource Include="FormEditor.resx">
+      <DependentUpon>FormEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Level\1.lvl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Level\2.lvl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Level\3.lvl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,18 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Key.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Player.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\testsound.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

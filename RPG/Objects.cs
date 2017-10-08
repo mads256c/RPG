@@ -10,7 +10,7 @@ using RPG.Properties;
 
 namespace RPG.Objects
 {
-    public class Wall : PictureBox
+    public sealed class Wall : PictureBox
     {
         public static List<Wall> Walls = new List<Wall>();
         public Wall(int x1, int y1, int x2, int y2) : base()
@@ -27,7 +27,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Grass : PictureBox
+    public sealed class Grass : PictureBox
     {
         public static List<Grass> Grasses = new List<Grass>();
 
@@ -48,7 +48,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Entrance
+    public sealed class Entrance
     {
         public static List<Entrance> Entrances = new List<Entrance>();
 
@@ -75,7 +75,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Door : PictureBox
+    public sealed class Door : PictureBox
     {
         public static List<Door> Doors = new List<Door>();
 
@@ -85,6 +85,7 @@ namespace RPG.Objects
             get => _open;
             set
             {
+                Logger.WriteLine($"Door {ID} open state changed to: {value}");
                 Visible = !value;
                 _open = value;
             }
@@ -108,7 +109,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Key : PictureBox
+    public sealed class Key : PictureBox
     {
         public static List<Key> Keys = new List<Key>();
 

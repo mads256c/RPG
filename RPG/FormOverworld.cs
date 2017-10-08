@@ -16,6 +16,7 @@ namespace RPG
         public FormOverworld()
         {
             InitializeComponent();
+            ClientSize = new Size(600, 500);
             Instance = this;
             Level.LoadLevel(1);
             Controls.Add(OverworldPlayer);
@@ -40,7 +41,9 @@ namespace RPG
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-
+#if DEBUG
+            new FormDebug().Show();
+#endif //DEBUG
         }
 
         private void timer_Tick(object sender, EventArgs e)
