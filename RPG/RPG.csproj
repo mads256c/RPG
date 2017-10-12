@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities.cs" />
+    <Compile Include="FormBattle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBattle.Designer.cs">
+      <DependentUpon>FormBattle.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDebug.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,8 +78,12 @@
     <Compile Include="Objects.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormBattle.resx">
+      <DependentUpon>FormBattle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDebug.resx">
       <DependentUpon>FormDebug.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\testsound.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Dirt.jpg" />
+    <Content Include="Resources\Grass.jpg" />
+    <Content Include="Resources\Tiles.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

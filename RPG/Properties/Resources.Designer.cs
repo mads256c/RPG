@@ -63,6 +63,26 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Dirt {
+            get {
+                object obj = ResourceManager.GetObject("Dirt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Grass {
+            get {
+                object obj = ResourceManager.GetObject("Grass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Key {
             get {
                 object obj = ResourceManager.GetObject("Key", resourceCulture);
@@ -86,6 +106,16 @@ namespace RPG.Properties {
         public static System.IO.UnmanagedMemoryStream testsound {
             get {
                 return ResourceManager.GetStream("testsound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Tiles {
+            get {
+                object obj = ResourceManager.GetObject("Tiles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

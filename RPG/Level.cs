@@ -1,6 +1,7 @@
 ﻿using System;
 using RPG.Objects;
 using System.IO;
+using System.Threading;
 
 namespace RPG
 {
@@ -17,7 +18,8 @@ namespace RPG
             Grass,
             Entrance,
             Door,
-            Key
+            Key,
+            Floor
         }
 
         public static void ClearLevel()
@@ -27,6 +29,7 @@ namespace RPG
             Entrance.Entrances.Clear();
             Door.Doors.Clear();
             Key.Keys.Clear();
+            Floor.Floors.Clear();
             FormOverworld.Instance.Controls.Clear();
         }
 
@@ -63,6 +66,9 @@ namespace RPG
                     case "[KEY]":
                         loadID = LoadID.Key;
                         continue;
+                    case "[FLOOR]":
+                        loadID = LoadID.Floor;
+                        continue;
                 }
 
                 string[] temp = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
@@ -72,6 +78,7 @@ namespace RPG
                         FormOverworld.Instance.Controls.Remove(FormOverworld.OverworldPlayer);
                         FormOverworld.OverworldPlayer = new OverworldPlayer(int.Parse(temp[0]), int.Parse(temp[1]));
                         FormOverworld.Instance.Controls.Add(FormOverworld.OverworldPlayer);
+                        FormOverworld.OverworldPlayer.BringToFront();
                         break;
                     case LoadID.Enemy:
                         throw new NotImplementedException();
@@ -89,6 +96,9 @@ namespace RPG
                         break;
                     case LoadID.Key:
                         new Key(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), int.Parse(temp[4]));
+                        break;
+                    case LoadID.Floor:
+                        new Floor(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), (Floor.FloorTexture)int.Parse(temp[4]));
                         break;
                 }
 
@@ -110,6 +120,12 @@ namespace RPG
                 foreach (var key in Key.Keys)
                 {
                     FormOverworld.Instance.Controls.Add(key);
+                }
+
+                foreach (var floor in Floor.Floors)
+                {
+                    FormOverworld.Instance.Controls.Add(floor);
+                    floor.SendToBack();
                 }
             }
         }

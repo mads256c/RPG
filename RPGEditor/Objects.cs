@@ -12,14 +12,15 @@ namespace RPGEditor
         Grass,
         Entrance,
         Door,
-        Key
+        Key,
+        Floor
     }
 
     public class Player : PictureBox
     {
         public static Player player = null;
 
-        public static ContextMenu ContextMenu;
+        public new static ContextMenu ContextMenu;
 
         public Player(int x, int y) : base()
         {
@@ -257,10 +258,46 @@ namespace RPGEditor
         }
     }
 
+    public class Floor : EditorObject
+    {
+        public static List<Floor> Floors = new List<Floor>();
+
+        public int TextureID = 0;
+
+        public Floor(int x1, int y1, int x2, int y2, int textureID)
+        {
+            Location = new Point();
+            Size = new Size(x2 - x1, y2 - y1);
+            TextureID = textureID;
+            BackColor = Color.Brown;
+            Floors.Add(this);
+        }
+
+        public override void EditObject()
+        {
+            using (FormEditObject formEditObject = new FormEditObject(Location.X, Location.Y, Location.X + Size.Width,
+                Location.Y + Size.Height, TextureID))
+            {
+                if (formEditObject.ShowDialog() == DialogResult.OK)
+                {
+                    var info = formEditObject.FormEditObjectInfo;
+                    Location = new Point(info.x1, info.y1);
+                    Size = new Size(info.x2 - info.x1, info.y2 - info.y1);
+                    TextureID = info.ID;
+                }
+            }
+        }
+
+        public override void RemoveObject()
+        {
+            Floors.Remove(this);
+        }
+    }
+
     //Fra stackoverflow. Lavet meget om af mig.
     public class EditorObject : SizeablePictureBox
     {
-        public static ContextMenu ContextMenu;
+        public new static ContextMenu ContextMenu;
 
         public EditorObject() : base()
         {

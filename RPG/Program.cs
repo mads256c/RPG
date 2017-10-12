@@ -9,6 +9,7 @@ namespace RPG
 {
     static class Program
     {
+        public static Random Random = new Random();
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,7 +18,7 @@ namespace RPG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormStart());
+            Application.Run(new FormOverworld());
         }
     }
 }

@@ -10,26 +10,27 @@ namespace RPG
     {
         public static string Name;
 
-        public static int Health => Level * 15 + Defence + 5;
-        public static int MP => Wisdom * 10;
+        public static int Health = MaxHealth;
+        public static int MaxHealth => Level * 15 + Defence * 5;
 
-        public static int Level;
+        public static int MP = MaxMP;
+        public static int MaxMP => Wisdom * 10;
+
+        public static int Level = 1;
         public static int XP;
         public static int XPNeeded => Level * 100;
 
-        public static int Strength;
-        public static int Wisdom;
-        public static int Speed;
+        public static int Strength = 1;
+        public static int Wisdom = 1;
+        public static int Speed = 1;
 
-        public static int Defence;
-        public static int Resistance;
+        public static int Defence = 1;
+        public static int Resistance = 1;
     }
 
 
     public sealed class OverworldPlayer : PictureBox
     {
-        public int Speed;
-
         public OverworldPlayer(int x, int y) : base()
         {
 
@@ -102,6 +103,11 @@ namespace RPG
             foreach (var entrance in Entrance.Entrances.ToList())
             {
                 entrance.Intersects(Bounds);
+            }
+
+            foreach (var grass in Grass.Grasses.ToList())
+            {
+                grass.Intersects(Bounds);
             }
         }
 

@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Walls");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Grasses");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Entrances");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Doors");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Keys");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Walls");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Grasses");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Entrances");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Doors");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Keys");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Floor");
             this.groupBoxLoadLevel = new System.Windows.Forms.GroupBox();
-            this.numericUpDownLoadLevel = new System.Windows.Forms.NumericUpDown();
             this.buttonLoadLevel = new System.Windows.Forms.Button();
+            this.numericUpDownLoadLevel = new System.Windows.Forms.NumericUpDown();
             this.groupBoxInfo = new System.Windows.Forms.GroupBox();
-            this.labelPlayerPosition = new System.Windows.Forms.Label();
-            this.labelPlayfieldSize = new System.Windows.Forms.Label();
-            this.labelPlayerSize = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.labelLevelID = new System.Windows.Forms.Label();
+            this.labelPlayerSize = new System.Windows.Forms.Label();
+            this.labelPlayfieldSize = new System.Windows.Forms.Label();
+            this.labelPlayerPosition = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBoxObjects = new System.Windows.Forms.GroupBox();
             this.treeViewObjects = new System.Windows.Forms.TreeView();
             this.groupBoxLog = new System.Windows.Forms.GroupBox();
@@ -65,13 +66,6 @@
             this.groupBoxLoadLevel.TabStop = false;
             this.groupBoxLoadLevel.Text = "Load level";
             // 
-            // numericUpDownLoadLevel
-            // 
-            this.numericUpDownLoadLevel.Location = new System.Drawing.Point(6, 19);
-            this.numericUpDownLoadLevel.Name = "numericUpDownLoadLevel";
-            this.numericUpDownLoadLevel.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownLoadLevel.TabIndex = 0;
-            // 
             // buttonLoadLevel
             // 
             this.buttonLoadLevel.Location = new System.Drawing.Point(119, 19);
@@ -81,6 +75,13 @@
             this.buttonLoadLevel.Text = "Load";
             this.buttonLoadLevel.UseVisualStyleBackColor = true;
             this.buttonLoadLevel.Click += new System.EventHandler(this.buttonLoadLevel_Click);
+            // 
+            // numericUpDownLoadLevel
+            // 
+            this.numericUpDownLoadLevel.Location = new System.Drawing.Point(6, 19);
+            this.numericUpDownLoadLevel.Name = "numericUpDownLoadLevel";
+            this.numericUpDownLoadLevel.Size = new System.Drawing.Size(107, 20);
+            this.numericUpDownLoadLevel.TabIndex = 0;
             // 
             // groupBoxInfo
             // 
@@ -95,23 +96,14 @@
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Info";
             // 
-            // labelPlayerPosition
+            // labelLevelID
             // 
-            this.labelPlayerPosition.AutoSize = true;
-            this.labelPlayerPosition.Location = new System.Drawing.Point(7, 20);
-            this.labelPlayerPosition.Name = "labelPlayerPosition";
-            this.labelPlayerPosition.Size = new System.Drawing.Size(101, 13);
-            this.labelPlayerPosition.TabIndex = 0;
-            this.labelPlayerPosition.Text = "Player position: X, Y";
-            // 
-            // labelPlayfieldSize
-            // 
-            this.labelPlayfieldSize.AutoSize = true;
-            this.labelPlayfieldSize.Location = new System.Drawing.Point(7, 46);
-            this.labelPlayfieldSize.Name = "labelPlayfieldSize";
-            this.labelPlayfieldSize.Size = new System.Drawing.Size(93, 13);
-            this.labelPlayfieldSize.TabIndex = 1;
-            this.labelPlayfieldSize.Text = "Playfield size: X, Y";
+            this.labelLevelID.AutoSize = true;
+            this.labelLevelID.Location = new System.Drawing.Point(7, 68);
+            this.labelLevelID.Name = "labelLevelID";
+            this.labelLevelID.Size = new System.Drawing.Size(60, 13);
+            this.labelLevelID.TabIndex = 3;
+            this.labelLevelID.Text = "Level ID: X";
             // 
             // labelPlayerSize
             // 
@@ -122,19 +114,28 @@
             this.labelPlayerSize.TabIndex = 2;
             this.labelPlayerSize.Text = "Player size: X, Y";
             // 
+            // labelPlayfieldSize
+            // 
+            this.labelPlayfieldSize.AutoSize = true;
+            this.labelPlayfieldSize.Location = new System.Drawing.Point(7, 46);
+            this.labelPlayfieldSize.Name = "labelPlayfieldSize";
+            this.labelPlayfieldSize.Size = new System.Drawing.Size(93, 13);
+            this.labelPlayfieldSize.TabIndex = 1;
+            this.labelPlayfieldSize.Text = "Playfield size: X, Y";
+            // 
+            // labelPlayerPosition
+            // 
+            this.labelPlayerPosition.AutoSize = true;
+            this.labelPlayerPosition.Location = new System.Drawing.Point(7, 20);
+            this.labelPlayerPosition.Name = "labelPlayerPosition";
+            this.labelPlayerPosition.Size = new System.Drawing.Size(101, 13);
+            this.labelPlayerPosition.TabIndex = 0;
+            this.labelPlayerPosition.Text = "Player position: X, Y";
+            // 
             // timer
             // 
             this.timer.Enabled = true;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // labelLevelID
-            // 
-            this.labelLevelID.AutoSize = true;
-            this.labelLevelID.Location = new System.Drawing.Point(7, 68);
-            this.labelLevelID.Name = "labelLevelID";
-            this.labelLevelID.Size = new System.Drawing.Size(60, 13);
-            this.labelLevelID.TabIndex = 3;
-            this.labelLevelID.Text = "Level ID: X";
             // 
             // groupBoxObjects
             // 
@@ -150,22 +151,25 @@
             // 
             this.treeViewObjects.Location = new System.Drawing.Point(6, 19);
             this.treeViewObjects.Name = "treeViewObjects";
-            treeNode6.Name = "NodeWalls";
-            treeNode6.Text = "Walls";
-            treeNode7.Name = "NodeGrasses";
-            treeNode7.Text = "Grasses";
-            treeNode8.Name = "NodeEntrances";
-            treeNode8.Text = "Entrances";
-            treeNode9.Name = "NodeDoors";
-            treeNode9.Text = "Doors";
-            treeNode10.Name = "NodeKeys";
-            treeNode10.Text = "Keys";
+            treeNode1.Name = "NodeWalls";
+            treeNode1.Text = "Walls";
+            treeNode2.Name = "NodeGrasses";
+            treeNode2.Text = "Grasses";
+            treeNode3.Name = "NodeEntrances";
+            treeNode3.Text = "Entrances";
+            treeNode4.Name = "NodeDoors";
+            treeNode4.Text = "Doors";
+            treeNode5.Name = "NodeKeys";
+            treeNode5.Text = "Keys";
+            treeNode6.Name = "Floor";
+            treeNode6.Text = "Floor";
             this.treeViewObjects.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.treeViewObjects.Size = new System.Drawing.Size(285, 414);
             this.treeViewObjects.TabIndex = 0;
             // 

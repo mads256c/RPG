@@ -86,11 +86,16 @@ namespace RPG
                 return;
             }
 
+            Player.Name = textBoxName.Text;
+
             Player.Strength = (int) numericUpDownStrength.Value;
             Player.Wisdom = (int) numericUpDownWisdom.Value;
             Player.Speed = (int) numericUpDownSpeed.Value;
             Player.Defence = (int) numericUpDownDefence.Value;
             Player.Resistance = (int) numericUpDownResistance.Value;
+
+            Player.Health = Player.MaxHealth;
+            Player.MP = Player.MaxMP;
 
             this.Hide();
             new FormOverworld().ShowDialog();

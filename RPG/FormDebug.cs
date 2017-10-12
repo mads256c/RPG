@@ -70,6 +70,14 @@ namespace RPG
                                 .Add($"X: {key.Location.X}, Y: {key.Location.Y}, W: {key.Size.Width}, H: {key.Size.Height}, ID: {key.ID}, V: {key.Visible}");
                         }
                         break;
+                    case 5:
+                        foreach (var floor in Floor.Floors)
+                        {
+                            treeViewObjects.Nodes[i].Nodes
+                                .Add(
+                                    $"X: {floor.Location.X}, Y: {floor.Location.Y}, W: {floor.Size.Width}, H: {floor.Size.Height}, S: {floor.floorTexture}");
+                        }
+                        break;
                 }
             }
             treeViewObjects.ExpandAll();

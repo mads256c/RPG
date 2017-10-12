@@ -32,7 +32,8 @@ namespace RPGEditor
             Grass,
             Entrance,
             Door,
-            Key
+            Key,
+            Floor
         }
 
         public static void AddObject(ObjectType objectType)
@@ -56,6 +57,9 @@ namespace RPGEditor
                     break;
                 case ObjectType.Key:
                     Instance.Controls.Add(new Key(0, 0, 100, 100, 0));
+                    break;
+                case ObjectType.Floor:
+                    Instance.Controls.Add(new Floor(0, 0, 100, 100, 0));
                     break;
             }
         }
@@ -90,6 +94,12 @@ namespace RPGEditor
             {
                 key.RemoveObject();
                 Instance.Controls.Remove(key);
+            }
+
+            foreach (var floor in Floor.Floors.ToList())
+            {
+                floor.RemoveObject();
+                Instance.Controls.Remove(floor);
             }
 
             Instance.Controls.Remove(Player.player);
@@ -133,6 +143,9 @@ namespace RPGEditor
                             continue;
                         case "[KEY]":
                             loadID = LoadID.Key;
+                            continue;
+                        case "[FLOOR]":
+                            loadID = LoadID.Floor;
                             continue;
                     }
 
@@ -207,6 +220,12 @@ namespace RPGEditor
                 foreach (var key in Key.Keys)
                 {
                     temp.Add($"{key.Location.X},{key.Location.Y},{key.Location.X + key.Size.Width},{key.Location.Y + key.Size.Height},{key.ID}");
+                }
+
+                temp.Add("[FLOOR]");
+                foreach (var floor in Floor.Floors)
+                {
+                    temp.Add($"{floor.Location.X},{floor.Location.Y},{floor.Location.X + floor.Size.Width},{floor.Location.Y + floor.Size.Height},{floor.TextureID}");
                 }
                 File.WriteAllLines(saveFileDialog.FileName, temp);
             }
