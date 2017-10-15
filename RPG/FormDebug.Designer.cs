@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Walls");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Grasses");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Entrances");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Doors");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Keys");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Floor");
             this.groupBoxLoadLevel = new System.Windows.Forms.GroupBox();
             this.buttonLoadLevel = new System.Windows.Forms.Button();
             this.numericUpDownLoadLevel = new System.Windows.Forms.NumericUpDown();
@@ -150,25 +144,6 @@
             // 
             this.treeViewObjects.Location = new System.Drawing.Point(6, 19);
             this.treeViewObjects.Name = "treeViewObjects";
-            treeNode1.Name = "NodeWalls";
-            treeNode1.Text = "Walls";
-            treeNode2.Name = "NodeGrasses";
-            treeNode2.Text = "Grasses";
-            treeNode3.Name = "NodeEntrances";
-            treeNode3.Text = "Entrances";
-            treeNode4.Name = "NodeDoors";
-            treeNode4.Text = "Doors";
-            treeNode5.Name = "NodeKeys";
-            treeNode5.Text = "Keys";
-            treeNode6.Name = "Floor";
-            treeNode6.Text = "Floor";
-            this.treeViewObjects.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
             this.treeViewObjects.Size = new System.Drawing.Size(285, 414);
             this.treeViewObjects.TabIndex = 0;
             // 
