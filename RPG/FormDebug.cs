@@ -38,6 +38,8 @@ namespace RPG
 
             labelLevelID.Text = $"Level ID: {Level.LoadedLevel}";
 
+
+            //Dette er en workaround på grund af en bug. Normalt kan man indexe treeViewNodes med en string, men den kaster en NullRefrence exception når jeg gør det på den måde.
             Dictionary<string, int> tempDictionary = new Dictionary<string, int>();
 
             foreach (TreeNode node in treeViewObjects.Nodes)
