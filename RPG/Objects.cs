@@ -19,7 +19,7 @@ namespace RPG.Objects
     {
         public new static List<Wall> Objects = new List<Wall>();
 
-        public Wall(int x1, int y1, int x2, int y2, object unused1, object unused2) : base(x1, y1, x2, y2)
+        public Wall(int x1, int y1, int x2, int y2) : base(x1, y1, x2, y2)
         {
             BackColor = Color.White;
             Objects.Add(this);
@@ -32,7 +32,7 @@ namespace RPG.Objects
 
         public int EncounterRate;
 
-        public Grass(int x1, int y1, int x2, int y2, int encounterRate, object unused2) : base(x1, y1, x2, y2)
+        public Grass(int x1, int y1, int x2, int y2, int encounterRate) : base(x1, y1, x2, y2)
         {
             BackColor = Color.DarkGreen;
             this.SetImage(Resources.Grass);
@@ -68,7 +68,7 @@ namespace RPG.Objects
 
         public int LevelID;
 
-        public Entrance(int x1, int y1, int x2, int y2, int levelID, object unused2) : base(x1, y1, x2, y2)
+        public Entrance(int x1, int y1, int x2, int y2, int levelID) : base(x1, y1, x2, y2)
         {
             LevelID = levelID;
             Objects.Add(this);
@@ -110,7 +110,7 @@ namespace RPG.Objects
 
         private bool _open = false;
 
-        public Door(int x1, int y1, int x2, int y2, int id, object unused2) : base(x1, y1, x2, y2)
+        public Door(int x1, int y1, int x2, int y2, int id) : base(x1, y1, x2, y2)
         {
             ID = id;
             BackColor = Color.SaddleBrown;
@@ -134,7 +134,7 @@ namespace RPG.Objects
 
         public int ID;
 
-        public Key(int x1, int y1, int x2, int y2, int id, object unused2) : base(x1, y1, x2, y2)
+        public Key(int x1, int y1, int x2, int y2, int id) : base(x1, y1, x2, y2)
         {
             ID = id;
             BackColor = Color.Transparent;
@@ -181,7 +181,7 @@ namespace RPG.Objects
 
         public FloorTexture floorTexture;
 
-        public Floor(int x1, int y1, int x2, int y2, int floor, object unused2) : base(x1, y1, x2, y2)
+        public Floor(int x1, int y1, int x2, int y2, int floor) : base(x1, y1, x2, y2)
         {
             Image temp;
             floorTexture = (FloorTexture)floor;

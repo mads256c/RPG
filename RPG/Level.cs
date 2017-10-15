@@ -77,15 +77,14 @@ namespace RPG
                 {
                     if (levelObject == loadID)
                     {
-                        var paramsList = new List<int>();
+                        var paramsList = new List<object>();
                         foreach (var param in temp)
                         {
                             paramsList.Add(int.Parse(param));
                         }
-                        paramsList.AddRange(new []{0, 0, 0, 0, 0});
 
 
-                        FormOverworld.Instance.Controls.Add((Control)Activator.CreateInstance(Type.GetType(levelObject), paramsList[0], paramsList[1], paramsList[2], paramsList[3], paramsList[4], paramsList[5]));
+                        FormOverworld.Instance.Controls.Add((Control)Activator.CreateInstance(Type.GetType(levelObject), paramsList.ToArray()));
                     }
                 }
                 end:
