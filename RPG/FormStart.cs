@@ -97,9 +97,9 @@ namespace RPG
             Player.Health = Player.MaxHealth;
             Player.MP = Player.MaxMP;
 
-            this.Hide();
+            Hide();
             new FormOverworld().ShowDialog();
-            this.Close();
+            Close();
 
         }
     }

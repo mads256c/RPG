@@ -4,8 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 //Alt i dette namespace er kopieret fra stackoverflow, med mindre andet er skrevet.
@@ -22,7 +20,7 @@ namespace RPG.Extensions
     public static class ProgressBarSetColor
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr w, IntPtr l);
 
         public static void SetColor(this ProgressBar progressBar, ProgressBarColor progressBarColor)
         {

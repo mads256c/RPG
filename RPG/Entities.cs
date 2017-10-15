@@ -31,7 +31,7 @@ namespace RPG
 
     public sealed class OverworldPlayer : PictureBox
     {
-        public OverworldPlayer(int x, int y) : base()
+        public OverworldPlayer(int x, int y)
         {
 
             Size = new Size(32, 64);
@@ -43,7 +43,7 @@ namespace RPG
 
         public void MoveUp()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(topCollision)) | Location.Y <= 0)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_topCollision)) | Location.Y <= 0)
             {
                 return;
             }
@@ -54,7 +54,7 @@ namespace RPG
 
         public void MoveDown()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(bottomCollision)) | Location.Y + Size.Height > FormOverworld.Instance.ClientSize.Height)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_bottomCollision)) | Location.Y + Size.Height > FormOverworld.Instance.ClientSize.Height)
             {
                 return;
             }
@@ -64,7 +64,7 @@ namespace RPG
 
         public void MoveRight()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(rightCollision)) | Location.X + Size.Width > FormOverworld.Instance.ClientSize.Width)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_rightCollision)) | Location.X + Size.Width > FormOverworld.Instance.ClientSize.Width)
             {
                 return;
             }
@@ -74,7 +74,7 @@ namespace RPG
 
         public void MoveLeft()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(leftCollision)) | Location.X < 0)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_leftCollision)) | Location.X < 0)
             {
                 return;
             }
@@ -84,16 +84,16 @@ namespace RPG
 
         public void UpdateCollision()
         {
-            topCollision.Location = new Point(Location.X, Location.Y - 1);
-            bottomCollision.Location = new Point(Location.X, Location.Y + Size.Height);
-            rightCollision.Location = new Point(Location.X + Size.Width, Location.Y);
-            leftCollision.Location = new Point(Location.X - 1, Location.Y);
+            _topCollision.Location = new Point(Location.X, Location.Y - 1);
+            _bottomCollision.Location = new Point(Location.X, Location.Y + Size.Height);
+            _rightCollision.Location = new Point(Location.X + Size.Width, Location.Y);
+            _leftCollision.Location = new Point(Location.X - 1, Location.Y);
         }
 
 
-        private Rectangle topCollision = new Rectangle(0, 0, 32, 1);
-        private Rectangle bottomCollision = new Rectangle(0, 0, 32, 1);
-        private Rectangle rightCollision = new Rectangle(0, 0, 1, 64);
-        private Rectangle leftCollision = new Rectangle(0, 0, 1, 64);
+        private Rectangle _topCollision = new Rectangle(0, 0, 32, 1);
+        private Rectangle _bottomCollision = new Rectangle(0, 0, 32, 1);
+        private Rectangle _rightCollision = new Rectangle(0, 0, 1, 64);
+        private Rectangle _leftCollision = new Rectangle(0, 0, 1, 64);
     }
 }

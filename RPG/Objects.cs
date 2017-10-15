@@ -1,21 +1,13 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RPG.Extensions;
 using RPG.Properties;
 
 namespace RPG.Objects
 {
-
-
-
-    public class Wall : LevelObject
+    public sealed class Wall : LevelObject
     {
         public new static List<Wall> Objects = new List<Wall>();
 
@@ -26,7 +18,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Grass : LevelObject
+    public sealed class Grass : LevelObject
     {
         public new static List<Grass> Objects = new List<Grass>();
 
@@ -62,7 +54,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Entrance : LevelObject
+    public sealed class Entrance : LevelObject
     {
         public new static List<Entrance> Objects = new List<Entrance>();
 
@@ -91,7 +83,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Door : LevelObject
+    public sealed class Door : LevelObject
     {
         public new static List<Door> Objects = new List<Door>();
 
@@ -108,7 +100,7 @@ namespace RPG.Objects
             }
         }
 
-        private bool _open = false;
+        private bool _open;
 
         public Door(int x1, int y1, int x2, int y2, int id) : base(x1, y1, x2, y2)
         {
@@ -128,7 +120,7 @@ namespace RPG.Objects
         }
     }
 
-    public class Key : LevelObject
+    public sealed class Key : LevelObject
     {
         public new static List<Key> Objects = new List<Key>();
 
@@ -167,11 +159,11 @@ namespace RPG.Objects
 
     }
 
-    public class Floor : LevelObject
+    public sealed class Floor : LevelObject
     {
         private static readonly Image Dirt = Resources.Dirt;
         private static readonly Image Tiles = Resources.Tiles;
-        public enum FloorTexture : int
+        private enum FloorTexture
         {
             Dirt = 0,
             Tiles = 1
@@ -179,13 +171,13 @@ namespace RPG.Objects
 
         public new static List<Floor> Objects = new List<Floor>();
 
-        public FloorTexture floorTexture;
+        private readonly FloorTexture _floorTexture;
 
         public Floor(int x1, int y1, int x2, int y2, int floor) : base(x1, y1, x2, y2)
         {
             Image temp;
-            floorTexture = (FloorTexture)floor;
-            switch (floorTexture)
+            _floorTexture = (FloorTexture)floor;
+            switch (_floorTexture)
             {
                 case FloorTexture.Dirt:
                     temp = Dirt;
@@ -204,7 +196,7 @@ namespace RPG.Objects
 
         public override string GetDebugInfo()
         {
-            return base.GetDebugInfo() + $", T:{floorTexture}";
+            return base.GetDebugInfo() + $", T:{_floorTexture}";
         }
     }
 

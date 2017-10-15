@@ -23,7 +23,7 @@ namespace RPG
         public static SoundPlayer SoundPlayer = new SoundPlayer();
 
         [Flags]
-        enum Direction
+        private enum Direction
         {
             Up = 1 << 0,
             Down = 1 << 1,
@@ -31,7 +31,7 @@ namespace RPG
             Left = 1 << 3
         }
 
-        private Direction direction;
+        private Direction _direction;
 
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -42,22 +42,22 @@ namespace RPG
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if ((direction & Direction.Up) == Direction.Up)
+            if ((_direction & Direction.Up) == Direction.Up)
             {
                 OverworldPlayer.MoveUp();
             }
 
-            if ((direction & Direction.Down) == Direction.Down)
+            if ((_direction & Direction.Down) == Direction.Down)
             {
                 OverworldPlayer.MoveDown();
             }
 
-            if ((direction & Direction.Right) == Direction.Right)
+            if ((_direction & Direction.Right) == Direction.Right)
             {
                 OverworldPlayer.MoveRight();
             }
 
-            if ((direction & Direction.Left) == Direction.Left)
+            if ((_direction & Direction.Left) == Direction.Left)
             {
                 OverworldPlayer.MoveLeft();
             }
@@ -68,19 +68,19 @@ namespace RPG
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    direction |= Direction.Up;
+                    _direction |= Direction.Up;
                     break;
 
                 case Keys.S:
-                    direction |= Direction.Down;
+                    _direction |= Direction.Down;
                     break;
 
                 case Keys.D:
-                    direction |= Direction.Right;
+                    _direction |= Direction.Right;
                     break;
 
                 case Keys.A:
-                    direction |= Direction.Left;
+                    _direction |= Direction.Left;
                     break;
             }
         }
@@ -90,19 +90,19 @@ namespace RPG
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    direction &= ~Direction.Up;
+                    _direction &= ~Direction.Up;
                     break;
 
                 case Keys.S:
-                    direction &= ~Direction.Down;
+                    _direction &= ~Direction.Down;
                     break;
 
                 case Keys.D:
-                    direction &= ~Direction.Right;
+                    _direction &= ~Direction.Right;
                     break;
 
                 case Keys.A:
-                    direction &= ~Direction.Left;
+                    _direction &= ~Direction.Left;
                     break;
             }
         }

@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using RPG.Objects;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Security.AccessControl;
-using System.Threading;
 using System.Windows.Forms;
 using RPG.Extensions;
 
@@ -27,9 +23,9 @@ namespace RPG
             Logger.WriteLine($"Changed level to: {levelID}");
             FormOverworld.Instance.Text = $"RPG - Level {levelID}";
             LoadedLevel = levelID;
-            string loadID = "";
+            var loadID = "";
 
-            foreach (string line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelID}.lvl"))
+            foreach (var line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelID}.lvl"))
             {
                 if (line == "Player")
                 {
@@ -67,7 +63,7 @@ namespace RPG
                         }
 
 
-                        FormOverworld.Instance.Controls.Add((Control)Activator.CreateInstance(Type.GetType(levelObject), paramsList.ToArray()));
+                        FormOverworld.Instance.Controls.Add((Control)Activator.CreateInstance(Type.GetType(levelObject) ?? throw new ArgumentNullException(), paramsList.ToArray()));
                     }
                 }
                 end:
