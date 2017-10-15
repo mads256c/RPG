@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,40 +12,35 @@ using RPG.Properties;
 
 namespace RPG.Objects
 {
-    public sealed class Wall : PictureBox
+
+
+
+    public class Wall : LevelObject
     {
-        public static List<Wall> Walls = new List<Wall>();
-        public Wall(int x1, int y1, int x2, int y2) : base()
+        public new static List<Wall> Objects = new List<Wall>();
+
+        public Wall(int x1, int y1, int x2, int y2, object unused1, object unused2) : base(x1, y1, x2, y2)
         {
             BackColor = Color.White;
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
-            Walls.Add(this);
-        }
-
-        public bool Intersects(Rectangle bounds)
-        {
-            return Bounds.IntersectsWith(bounds);
+            Objects.Add(this);
         }
     }
 
-    public sealed class Grass : PictureBox
+    public class Grass : LevelObject
     {
-        public static List<Grass> Grasses = new List<Grass>();
+        public new static List<Grass> Objects = new List<Grass>();
 
         public int EncounterRate;
 
-        public Grass(int x1, int y1, int x2, int y2, int encounterRate) : base()
+        public Grass(int x1, int y1, int x2, int y2, int encounterRate, object unused2) : base(x1, y1, x2, y2)
         {
             BackColor = Color.DarkGreen;
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
             this.SetImage(Resources.Grass);
             EncounterRate = encounterRate;
-            Grasses.Add(this);
+            Objects.Add(this);
         }
 
-        public bool Intersects(Rectangle bounds)
+        public override bool Intersects(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds))
             {
@@ -59,24 +55,26 @@ namespace RPG.Objects
             }
             return false;
         }
+
+        public override string GetDebugInfo()
+        {
+            return base.GetDebugInfo() + $", E:{EncounterRate}";
+        }
     }
 
-    public sealed class Entrance
+    public class Entrance : LevelObject
     {
-        public static List<Entrance> Entrances = new List<Entrance>();
+        public new static List<Entrance> Objects = new List<Entrance>();
 
         public int LevelID;
-        public Rectangle Bounds;
 
-        public Entrance(int x1, int y1, int x2, int y2, int levelID)
+        public Entrance(int x1, int y1, int x2, int y2, int levelID, object unused2) : base(x1, y1, x2, y2)
         {
             LevelID = levelID;
-            Bounds.Location = new Point(x1, y1);
-            Bounds.Size = new Size(x2 - x1, y2 - y1);
-            Entrances.Add(this);
+            Objects.Add(this);
         }
 
-        public bool Intersects(Rectangle bounds)
+        public override bool Intersects(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds))
             {
@@ -86,15 +84,21 @@ namespace RPG.Objects
             return false;
 
         }
+
+        public override string GetDebugInfo()
+        {
+            return base.GetDebugInfo() + $", ID:{LevelID}";
+        }
     }
 
-    public sealed class Door : PictureBox
+    public class Door : LevelObject
     {
-        public static List<Door> Doors = new List<Door>();
+        public new static List<Door> Objects = new List<Door>();
 
         public int ID;
 
-        public bool Open {
+        public bool Open
+        {
             get => _open;
             set
             {
@@ -106,43 +110,43 @@ namespace RPG.Objects
 
         private bool _open = false;
 
-        public Door(int x1,int y1, int x2, int y2, int id) : base()
+        public Door(int x1, int y1, int x2, int y2, int id, object unused2) : base(x1, y1, x2, y2)
         {
-            BackColor = Color.SaddleBrown;
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
             ID = id;
-            Doors.Add(this);
+            BackColor = Color.SaddleBrown;
+            Objects.Add(this);
         }
 
-
-        public bool Intersects(Rectangle bounds)
+        public override bool Intersects(Rectangle bounds)
         {
-            return Bounds.IntersectsWith(bounds);
+            return !Open && base.Intersects(bounds);
+        }
+
+        public override string GetDebugInfo()
+        {
+            return base.GetDebugInfo() + $", ID:{ID}, O:{Open}";
         }
     }
 
-    public sealed class Key : PictureBox
+    public class Key : LevelObject
     {
-        public static List<Key> Keys = new List<Key>();
+        public new static List<Key> Objects = new List<Key>();
 
         public int ID;
 
-        public Key(int x1, int y1, int x2, int y2, int id) : base()
+        public Key(int x1, int y1, int x2, int y2, int id, object unused2) : base(x1, y1, x2, y2)
         {
-            BackColor = Color.Transparent;
-            Image = Properties.Resources.Key;
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
             ID = id;
-            Keys.Add(this);
+            BackColor = Color.Transparent;
+            Image = Resources.Key;
+            Objects.Add(this);
         }
 
-        public bool Intersects(Rectangle bounds)
+        public override bool Intersects(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds) && Visible)
             {
-                foreach (var door in Door.Doors)
+                foreach (var door in Door.Objects)
                 {
                     if (door.ID == ID)
                         door.Open = true;
@@ -153,11 +157,17 @@ namespace RPG.Objects
                 return true;
             }
             return false;
-            
+
         }
+
+        public override string GetDebugInfo()
+        {
+            return base.GetDebugInfo() + $", ID:{ID}";
+        }
+
     }
 
-    public class Floor : PictureBox
+    public class Floor : LevelObject
     {
         private static readonly Image Dirt = Resources.Dirt;
         private static readonly Image Tiles = Resources.Tiles;
@@ -167,17 +177,14 @@ namespace RPG.Objects
             Tiles = 1
         }
 
-        public static List<Floor> Floors = new List<Floor>();
+        public new static List<Floor> Objects = new List<Floor>();
 
         public FloorTexture floorTexture;
 
-        public Floor(int x1, int y1, int x2, int y2, FloorTexture floor) : base()
+        public Floor(int x1, int y1, int x2, int y2, int floor, object unused2) : base(x1, y1, x2, y2)
         {
-            BackColor = Color.Brown;
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
-            System.Drawing.Image temp;
-            floorTexture = floor;
+            Image temp;
+            floorTexture = (FloorTexture)floor;
             switch (floorTexture)
             {
                 case FloorTexture.Dirt:
@@ -190,7 +197,36 @@ namespace RPG.Objects
                     throw new ArgumentOutOfRangeException(nameof(floor), floor, null);
             }
             this.SetImage(temp);
-            Floors.Add(this);
+            Objects.Add(this);
+        }
+
+        public override bool Intersects(Rectangle bounds) => false;
+
+        public override string GetDebugInfo()
+        {
+            return base.GetDebugInfo() + $", T:{floorTexture}";
+        }
+    }
+
+    public class LevelObject : PictureBox
+    {
+        public static List<LevelObject> Objects = new List<LevelObject>();
+
+        public LevelObject(int x1, int y1, int x2, int y2)
+        {
+            Location = new Point(x1, y1);
+            Size = new Size(x2 - x1, y2 - y1);
+            Objects.Add(this);
+        }
+
+        public virtual bool Intersects(Rectangle bounds)
+        {
+            return Bounds.IntersectsWith(bounds);
+        }
+
+        public virtual string GetDebugInfo()
+        {
+            return $"X:{Location.X}, Y:{Location.Y}, W:{Size.Width}, H:{Size.Height}";
         }
 
     }

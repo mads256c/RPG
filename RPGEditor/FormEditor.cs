@@ -123,28 +123,28 @@ namespace RPGEditor
                 {
                     switch (line)
                     {
-                        case "[PLAYER]":
+                        case "Player":
                             loadID = LoadID.Player;
                             continue;
-                        case "[ENEMY]":
+                        case "RPG.Entities.Enemy":
                             loadID = LoadID.Enemy;
                             continue;
-                        case "[WALL]":
+                        case "RPG.Objects.Wall":
                             loadID = LoadID.Wall;
                             continue;
-                        case "[GRASS]":
+                        case "RPG.Objects.Grass":
                             loadID = LoadID.Grass;
                             continue;
-                        case "[ENTRANCE]":
+                        case "RPG.Objects.Entrance":
                             loadID = LoadID.Entrance;
                             continue;
-                        case "[DOOR]":
+                        case "RPG.Objects.Door":
                             loadID = LoadID.Door;
                             continue;
-                        case "[KEY]":
+                        case "RPG.Objects.Key":
                             loadID = LoadID.Key;
                             continue;
-                        case "[FLOOR]":
+                        case "RPG.Objects.Floor":
                             loadID = LoadID.Floor;
                             continue;
                     }
@@ -189,40 +189,40 @@ namespace RPGEditor
             {
                 List<string> temp = new List<string>();
 
-                temp.Add("[PLAYER]");
+                temp.Add("Player");
                 temp.Add($"{Player.player.Location.X},{Player.player.Location.Y}");
 
-                temp.Add("[WALL]");
+                temp.Add("RPG.Objects.Wall");
                 foreach (var wall in Wall.Walls)
                 {
                     temp.Add($"{wall.Location.X},{wall.Location.Y},{wall.Location.X + wall.Size.Width},{wall.Location.Y + wall.Size.Height}");
                 }
 
-                temp.Add("[GRASS]");
+                temp.Add("RPG.Objects.Grass");
                 foreach (var grass in Grass.Grasses)
                 {
                     temp.Add($"{grass.Location.X},{grass.Location.Y},{grass.Location.X + grass.Size.Width},{grass.Location.Y + grass.Size.Height},{grass.EncounterRate}");
                 }
 
-                temp.Add("[ENTRANCE]");
+                temp.Add("RPG.Objects.Entrances");
                 foreach (var entrance in Entrance.Entrances)
                 {
                     temp.Add($"{entrance.Location.X},{entrance.Location.Y},{entrance.Location.X + entrance.Size.Width},{entrance.Location.Y + entrance.Size.Height},{entrance.LevelID}");
                 }
 
-                temp.Add("[DOOR]");
+                temp.Add("RPG.Objects.Door");
                 foreach (var door in Door.Doors)
                 {
                     temp.Add($"{door.Location.X},{door.Location.Y},{door.Location.X + door.Size.Width},{door.Location.Y + door.Size.Height},{door.ID}");
                 }
 
-                temp.Add("[KEY]");
+                temp.Add("RPG.Objects.Key");
                 foreach (var key in Key.Keys)
                 {
                     temp.Add($"{key.Location.X},{key.Location.Y},{key.Location.X + key.Size.Width},{key.Location.Y + key.Size.Height},{key.ID}");
                 }
 
-                temp.Add("[FLOOR]");
+                temp.Add("RPG.Objects.Floor");
                 foreach (var floor in Floor.Floors)
                 {
                     temp.Add($"{floor.Location.X},{floor.Location.Y},{floor.Location.X + floor.Size.Width},{floor.Location.Y + floor.Size.Height},{floor.TextureID}");

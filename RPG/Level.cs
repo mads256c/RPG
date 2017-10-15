@@ -1,35 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using RPG.Objects;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Security.AccessControl;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace RPG
 {
+    public static class ReflectiveEnumerator
+    {
+        static ReflectiveEnumerator() { }
+
+        public static List<string> GetEnumerableOfType<T>() where T : class
+        {
+            List<string> objects = new List<string>();
+            foreach (Type type in
+                Assembly.GetAssembly(typeof(T)).GetTypes()
+                    .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
+            {
+                objects.Add(type.FullName);
+            }
+            objects.Sort();
+            return objects;
+        }
+    }
+
     public static class Level
     {
         public static int LoadedLevel;
 
-        private enum LoadID
-        {
-            None,
-            Player,
-            Enemy,
-            Wall,
-            Grass,
-            Entrance,
-            Door,
-            Key,
-            Floor
-        }
-
         public static void ClearLevel()
         {
-            Wall.Walls.Clear();
-            Grass.Grasses.Clear();
-            Entrance.Entrances.Clear();
-            Door.Doors.Clear();
-            Key.Keys.Clear();
-            Floor.Floors.Clear();
+            LevelObject.Objects.Clear();
             FormOverworld.Instance.Controls.Clear();
         }
 
@@ -39,94 +44,58 @@ namespace RPG
             Logger.WriteLine($"Changed level to: {levelID}");
             FormOverworld.Instance.Text = $"RPG - Level {levelID}";
             LoadedLevel = levelID;
-            LoadID loadID = LoadID.None;
+            string loadID = "";
 
             foreach (string line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelID}.lvl"))
             {
-                switch (line)
+                if (line == "Player")
                 {
-                    case "[PLAYER]":
-                        loadID = LoadID.Player;
-                        continue;
-                    case "[ENEMY]":
-                        loadID = LoadID.Enemy;
-                        continue;
-                    case "[WALL]":
-                        loadID = LoadID.Wall;
-                        continue;
-                    case "[GRASS]":
-                        loadID = LoadID.Grass;
-                        continue;
-                    case "[ENTRANCE]":
-                        loadID = LoadID.Entrance;
-                        continue;
-                    case "[DOOR]":
-                        loadID = LoadID.Door;
-                        continue;
-                    case "[KEY]":
-                        loadID = LoadID.Key;
-                        continue;
-                    case "[FLOOR]":
-                        loadID = LoadID.Floor;
-                        continue;
+                    loadID = "Player";
+                    goto end;
+                }
+
+                foreach (var levelObject in ReflectiveEnumerator.GetEnumerableOfType<LevelObject>())
+                {
+                    if (line == levelObject)
+                    {
+                        loadID = levelObject;
+                        goto end;
+                    }
                 }
 
                 string[] temp = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                switch (loadID)
+
+                if (loadID == "Player")
                 {
-                    case LoadID.Player:
-                        FormOverworld.Instance.Controls.Remove(FormOverworld.OverworldPlayer);
-                        FormOverworld.OverworldPlayer = new OverworldPlayer(int.Parse(temp[0]), int.Parse(temp[1]));
-                        FormOverworld.Instance.Controls.Add(FormOverworld.OverworldPlayer);
-                        FormOverworld.OverworldPlayer.BringToFront();
-                        break;
-                    case LoadID.Enemy:
-                        throw new NotImplementedException();
-                    case LoadID.Wall:
-                        new Wall(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]));
-                        break;
-                    case LoadID.Grass:
-                        new Grass(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), int.Parse(temp[4]));
-                        break;
-                    case LoadID.Entrance:
-                        new Entrance(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), int.Parse(temp[4]));
-                        break;
-                    case LoadID.Door:
-                        new Door(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), int.Parse(temp[4]));
-                        break;
-                    case LoadID.Key:
-                        new Key(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), int.Parse(temp[4]));
-                        break;
-                    case LoadID.Floor:
-                        new Floor(int.Parse(temp[0]), int.Parse(temp[1]), int.Parse(temp[2]), int.Parse(temp[3]), (Floor.FloorTexture)int.Parse(temp[4]));
-                        break;
+                    FormOverworld.Instance.Controls.Remove(FormOverworld.OverworldPlayer);
+                    FormOverworld.OverworldPlayer = new OverworldPlayer(int.Parse(temp[0]), int.Parse(temp[1]));
+                    FormOverworld.Instance.Controls.Add(FormOverworld.OverworldPlayer);
+                    FormOverworld.OverworldPlayer.BringToFront();
                 }
 
-                foreach (var wall in Wall.Walls)
+                foreach (var levelObject in ReflectiveEnumerator.GetEnumerableOfType<LevelObject>())
                 {
-                    FormOverworld.Instance.Controls.Add(wall);
-                }
+                    if (levelObject == loadID)
+                    {
+                        var paramsList = new List<int>();
+                        foreach (var param in temp)
+                        {
+                            paramsList.Add(int.Parse(param));
+                        }
+                        paramsList.AddRange(new []{0, 0, 0, 0, 0});
 
-                foreach (var grass in Grass.Grasses)
-                {
-                    FormOverworld.Instance.Controls.Add(grass);
-                }
 
-                foreach (var door in Door.Doors)
-                {
-                    FormOverworld.Instance.Controls.Add(door);
+                        FormOverworld.Instance.Controls.Add((Control)Activator.CreateInstance(Type.GetType(levelObject), paramsList[0], paramsList[1], paramsList[2], paramsList[3], paramsList[4], paramsList[5]));
+                    }
                 }
+                end:
+                ;
 
-                foreach (var key in Key.Keys)
-                {
-                    FormOverworld.Instance.Controls.Add(key);
-                }
+            }
 
-                foreach (var floor in Floor.Floors)
-                {
-                    FormOverworld.Instance.Controls.Add(floor);
-                    floor.SendToBack();
-                }
+            foreach (var levelObject in LevelObject.Objects)
+            {
+                FormOverworld.Instance.Controls.Add(levelObject);
             }
         }
     }

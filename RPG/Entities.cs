@@ -39,51 +39,47 @@ namespace RPG
             BackColor = Color.Transparent;
             Image = Resources.Player;
             UpdateCollision();
-            TriggerEvents();
         }
 
         public void MoveUp()
         {
-            if (Wall.Walls.Any(wall => wall.Intersects(topCollision)) | Door.Doors.Any(door => door.Intersects(topCollision) && !door.Open) | Location.Y < 0)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(topCollision)) | Location.Y <= 0)
             {
                 return;
             }
             Location = new Point(Location.X, Location.Y - 1);
             UpdateCollision();
-            TriggerEvents();
+
         }
 
         public void MoveDown()
         {
-            if (Wall.Walls.Any(wall => wall.Intersects(bottomCollision)) | Door.Doors.Any(door => door.Intersects(bottomCollision) && !door.Open) | Location.Y + Size.Height > FormOverworld.Instance.ClientSize.Height)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(bottomCollision)) | Location.Y + Size.Height > FormOverworld.Instance.ClientSize.Height)
             {
                 return;
             }
             Location = new Point(Location.X, Location.Y + 1);
             UpdateCollision();
-            TriggerEvents();
         }
 
         public void MoveRight()
         {
-            if (Wall.Walls.Any(wall => wall.Intersects(rightCollision)) | Door.Doors.Any(door => door.Intersects(rightCollision) && !door.Open) | Location.X + Size.Width > FormOverworld.Instance.ClientSize.Width)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(rightCollision)) | Location.X + Size.Width > FormOverworld.Instance.ClientSize.Width)
             {
                 return;
             }
             Location = new Point(Location.X + 1, Location.Y);
             UpdateCollision();
-            TriggerEvents();
         }
 
         public void MoveLeft()
         {
-            if (Wall.Walls.Any(wall => wall.Intersects(leftCollision)) | Door.Doors.Any(door => door.Intersects(leftCollision) && !door.Open ) | Location.X < 0)
+            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(leftCollision)) | Location.X < 0)
             {
                 return;
             }
             Location = new Point(Location.X - 1, Location.Y);
             UpdateCollision();
-            TriggerEvents();
         }
 
         public void UpdateCollision()
@@ -94,22 +90,6 @@ namespace RPG
             leftCollision.Location = new Point(Location.X - 1, Location.Y);
         }
 
-        public void TriggerEvents()
-        {
-            foreach (var key in Key.Keys.ToList())
-            {
-                key.Intersects(Bounds);
-            }
-            foreach (var entrance in Entrance.Entrances.ToList())
-            {
-                entrance.Intersects(Bounds);
-            }
-
-            foreach (var grass in Grass.Grasses.ToList())
-            {
-                grass.Intersects(Bounds);
-            }
-        }
 
         private Rectangle topCollision = new Rectangle(0, 0, 32, 1);
         private Rectangle bottomCollision = new Rectangle(0, 0, 32, 1);

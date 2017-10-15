@@ -12,7 +12,7 @@ namespace RPG
             InitializeComponent();
             ClientSize = new Size(600, 500);
             Instance = this;
-            Level.LoadLevel(1);
+            Level.LoadLevel(5);
             Controls.Add(OverworldPlayer);
         }
 

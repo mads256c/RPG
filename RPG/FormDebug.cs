@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using RPG.Objects;
 
@@ -9,6 +10,14 @@ namespace RPG
         public FormDebug()
         {
             InitializeComponent();
+            treeViewObjects.Nodes.Clear();
+            foreach (var obj in ReflectiveEnumerator.GetEnumerableOfType<LevelObject>())
+            {
+                Logger.WriteLine(obj);
+                treeViewObjects.Nodes.Add(obj);
+            }
+            timer.Start();
+
         }
 
         private void buttonLoadLevel_Click(object sender, EventArgs e)
@@ -29,57 +38,28 @@ namespace RPG
 
             labelLevelID.Text = $"Level ID: {Level.LoadedLevel}";
 
+            Dictionary<string, int> tempDictionary = new Dictionary<string, int>();
 
-            for (int i = 0; i < treeViewObjects.Nodes.Count; i++)
+            foreach (TreeNode node in treeViewObjects.Nodes)
             {
-                treeViewObjects.Nodes[i].Nodes.Clear();
-                switch (i)
-                {
-                    case 0:
-                        foreach (var wall in Wall.Walls)
-                        {
-                            treeViewObjects.Nodes[i].Nodes
-                                .Add($"X: {wall.Location.X}, Y: {wall.Location.Y}, W: {wall.Size.Width}, H: {wall.Size.Height}");
-                        }
-                        break;
-                    case 1:
-                        foreach (var grass in Grass.Grasses)
-                        {
-                            treeViewObjects.Nodes[i].Nodes
-                                .Add($"X: {grass.Location.X}, Y: {grass.Location.Y}, W: {grass.Size.Width}, H: {grass.Size.Height}, E: {grass.EncounterRate}");
-                        }
-                        break;
-                    case 2:
-                        foreach (var entrance in Entrance.Entrances)
-                        {
-                            treeViewObjects.Nodes[i].Nodes
-                                .Add($"X: {entrance.Bounds.Location.X}, Y: {entrance.Bounds.Location.Y}, W: {entrance.Bounds.Size.Width}, H: {entrance.Bounds.Size.Height}, ID: {entrance.LevelID}");
-                        }
-                        break;
-                    case 3:
-                        foreach (var door in Door.Doors)
-                        {
-                            treeViewObjects.Nodes[i].Nodes
-                                .Add($"X: {door.Location.X}, Y: {door.Location.Y}, W: {door.Size.Width}, H: {door.Size.Height}, ID: {door.ID}, O: {door.Open}");
-                        }
-                        break;
-                    case 4:
-                        foreach (var key in Key.Keys)
-                        {
-                            treeViewObjects.Nodes[i].Nodes
-                                .Add($"X: {key.Location.X}, Y: {key.Location.Y}, W: {key.Size.Width}, H: {key.Size.Height}, ID: {key.ID}, V: {key.Visible}");
-                        }
-                        break;
-                    case 5:
-                        foreach (var floor in Floor.Floors)
-                        {
-                            treeViewObjects.Nodes[i].Nodes
-                                .Add(
-                                    $"X: {floor.Location.X}, Y: {floor.Location.Y}, W: {floor.Size.Width}, H: {floor.Size.Height}, S: {floor.floorTexture}");
-                        }
-                        break;
-                }
+                tempDictionary.Add(node.Text, node.Index);
+                node.Nodes.Clear();
             }
+
+            foreach (var levelObject in LevelObject.Objects)
+            {
+                int index = 0;
+                foreach (KeyValuePair<string, int> keyPair in tempDictionary)
+                {
+                    if (levelObject.GetType().FullName == keyPair.Key)
+                    {
+                        index = keyPair.Value;
+                        break;
+                    }
+                }
+                treeViewObjects.Nodes[index].Nodes.Add(levelObject.GetDebugInfo());
+            }
+
             treeViewObjects.ExpandAll();
 
             textBoxLog.Text = Logger.Log;
