@@ -26,7 +26,7 @@ namespace RPG
             labelPointsLeft.Text = $"Point tilbage: {PointsLeft}";
         }
 
-        private void numericUpDownStrength_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownStrength_ValueChanged(object sender, EventArgs e)
         {
             if (!CheckPoints())
             {
@@ -36,7 +36,7 @@ namespace RPG
 
         }
 
-        private void numericUpDownWisdom_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownWisdom_ValueChanged(object sender, EventArgs e)
         {
             if (!CheckPoints())
             {
@@ -45,7 +45,7 @@ namespace RPG
             UpdatePoints();
         }
 
-        private void numericUpDownSpeed_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownSpeed_ValueChanged(object sender, EventArgs e)
         {
             if (!CheckPoints())
             {
@@ -54,7 +54,7 @@ namespace RPG
             UpdatePoints();
         }
 
-        private void numericUpDownDefence_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownDefence_ValueChanged(object sender, EventArgs e)
         {
             if (!CheckPoints())
             {
@@ -63,7 +63,7 @@ namespace RPG
             UpdatePoints();
         }
 
-        private void numericUpDownResistance_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownResistance_ValueChanged(object sender, EventArgs e)
         {
             if (!CheckPoints())
             {
@@ -72,7 +72,7 @@ namespace RPG
             UpdatePoints();
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void ButtonOK_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {

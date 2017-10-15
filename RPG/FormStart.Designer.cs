@@ -106,7 +106,7 @@
             this.buttonOK.TabIndex = 4;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
             // numericUpDownStrength
             // 
@@ -124,7 +124,7 @@
             0,
             0,
             0});
-            this.numericUpDownStrength.ValueChanged += new System.EventHandler(this.numericUpDownStrength_ValueChanged);
+            this.numericUpDownStrength.ValueChanged += new System.EventHandler(this.NumericUpDownStrength_ValueChanged);
             // 
             // labelPointsLeft
             // 
@@ -169,7 +169,7 @@
             0,
             0,
             0});
-            this.numericUpDownWisdom.ValueChanged += new System.EventHandler(this.numericUpDownWisdom_ValueChanged);
+            this.numericUpDownWisdom.ValueChanged += new System.EventHandler(this.NumericUpDownWisdom_ValueChanged);
             // 
             // labelSpeed
             // 
@@ -196,7 +196,7 @@
             0,
             0,
             0});
-            this.numericUpDownSpeed.ValueChanged += new System.EventHandler(this.numericUpDownSpeed_ValueChanged);
+            this.numericUpDownSpeed.ValueChanged += new System.EventHandler(this.NumericUpDownSpeed_ValueChanged);
             // 
             // labelResistance
             // 
@@ -223,7 +223,7 @@
             0,
             0,
             0});
-            this.numericUpDownResistance.ValueChanged += new System.EventHandler(this.numericUpDownResistance_ValueChanged);
+            this.numericUpDownResistance.ValueChanged += new System.EventHandler(this.NumericUpDownResistance_ValueChanged);
             // 
             // labelDefence
             // 
@@ -250,7 +250,7 @@
             0,
             0,
             0});
-            this.numericUpDownDefence.ValueChanged += new System.EventHandler(this.numericUpDownDefence_ValueChanged);
+            this.numericUpDownDefence.ValueChanged += new System.EventHandler(this.NumericUpDownDefence_ValueChanged);
             // 
             // FormStart
             // 
