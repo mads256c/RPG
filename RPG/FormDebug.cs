@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using RPG.Extensions;
 using RPG.Objects;
 
 namespace RPG
@@ -11,7 +12,7 @@ namespace RPG
         {
             InitializeComponent();
             treeViewObjects.Nodes.Clear();
-            foreach (var obj in ReflectiveEnumerator.GetEnumerableOfType<LevelObject>())
+            foreach (var obj in InheritedClassEnumerator.GetEnumerableOfType<LevelObject>())
             {
                 Logger.WriteLine(obj);
                 treeViewObjects.Nodes.Add(obj);

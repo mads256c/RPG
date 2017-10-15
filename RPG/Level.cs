@@ -7,27 +7,10 @@ using System.Reflection;
 using System.Security.AccessControl;
 using System.Threading;
 using System.Windows.Forms;
+using RPG.Extensions;
 
 namespace RPG
 {
-    public static class ReflectiveEnumerator
-    {
-        static ReflectiveEnumerator() { }
-
-        public static List<string> GetEnumerableOfType<T>() where T : class
-        {
-            List<string> objects = new List<string>();
-            foreach (Type type in
-                Assembly.GetAssembly(typeof(T)).GetTypes()
-                    .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
-            {
-                objects.Add(type.FullName);
-            }
-            objects.Sort();
-            return objects;
-        }
-    }
-
     public static class Level
     {
         public static int LoadedLevel;
@@ -54,7 +37,7 @@ namespace RPG
                     goto end;
                 }
 
-                foreach (var levelObject in ReflectiveEnumerator.GetEnumerableOfType<LevelObject>())
+                foreach (var levelObject in InheritedClassEnumerator.GetListOfInheritedClasses<LevelObject>())
                 {
                     if (line == levelObject)
                     {
@@ -73,7 +56,7 @@ namespace RPG
                     FormOverworld.OverworldPlayer.BringToFront();
                 }
 
-                foreach (var levelObject in ReflectiveEnumerator.GetEnumerableOfType<LevelObject>())
+                foreach (var levelObject in InheritedClassEnumerator.GetListOfInheritedClasses<LevelObject>())
                 {
                     if (levelObject == loadID)
                     {

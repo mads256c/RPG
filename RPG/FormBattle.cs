@@ -17,9 +17,9 @@ namespace RPG
         {
             InitializeComponent();
 
-            progressBarPlayerHP.SetState(ProgressBarColor.Red);
-            progressBarPlayerMP.SetState(ProgressBarColor.Green);
-            progressBarPlayerXP.SetState(ProgressBarColor.Yellow);
+            progressBarPlayerHP.SetColor(ProgressBarColor.Red);
+            progressBarPlayerMP.SetColor(ProgressBarColor.Green);
+            progressBarPlayerXP.SetColor(ProgressBarColor.Yellow);
 
             groupBoxPlayer.Text = Player.Name;
 
