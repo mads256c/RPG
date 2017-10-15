@@ -74,7 +74,7 @@
             this.buttonLoadLevel.TabIndex = 1;
             this.buttonLoadLevel.Text = "Load";
             this.buttonLoadLevel.UseVisualStyleBackColor = true;
-            this.buttonLoadLevel.Click += new System.EventHandler(this.buttonLoadLevel_Click);
+            this.buttonLoadLevel.Click += new System.EventHandler(this.ButtonLoadLevel_Click);
             // 
             // numericUpDownLoadLevel
             // 
@@ -134,7 +134,7 @@
             // 
             // timer
             // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // groupBoxObjects
             // 

@@ -106,13 +106,13 @@ namespace RPGEditor
             Player.player = null;
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
 
             AddObject((ObjectType)Enum.Parse(typeof(ObjectType), comboBoxObjectType.Text));
         }
 
-        private void buttonOpen_Click(object sender, EventArgs e)
+        private void ButtonOpen_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -183,50 +183,32 @@ namespace RPGEditor
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                List<string> temp = new List<string>();
+                var temp = new List<string>();
 
                 temp.Add("Player");
                 temp.Add($"{Player.player.Location.X},{Player.player.Location.Y}");
 
                 temp.Add("RPG.Objects.Wall");
-                foreach (var wall in Wall.Walls)
-                {
-                    temp.Add($"{wall.Location.X},{wall.Location.Y},{wall.Location.X + wall.Size.Width},{wall.Location.Y + wall.Size.Height}");
-                }
+                temp.AddRange(Wall.Walls.Select(wall => $"{wall.Location.X},{wall.Location.Y},{wall.Location.X + wall.Size.Width},{wall.Location.Y + wall.Size.Height}"));
 
                 temp.Add("RPG.Objects.Grass");
-                foreach (var grass in Grass.Grasses)
-                {
-                    temp.Add($"{grass.Location.X},{grass.Location.Y},{grass.Location.X + grass.Size.Width},{grass.Location.Y + grass.Size.Height},{grass.EncounterRate}");
-                }
+                temp.AddRange(Grass.Grasses.Select(grass => $"{grass.Location.X},{grass.Location.Y},{grass.Location.X + grass.Size.Width},{grass.Location.Y + grass.Size.Height},{grass.EncounterRate}"));
 
                 temp.Add("RPG.Objects.Entrances");
-                foreach (var entrance in Entrance.Entrances)
-                {
-                    temp.Add($"{entrance.Location.X},{entrance.Location.Y},{entrance.Location.X + entrance.Size.Width},{entrance.Location.Y + entrance.Size.Height},{entrance.LevelID}");
-                }
+                temp.AddRange(Entrance.Entrances.Select(entrance => $"{entrance.Location.X},{entrance.Location.Y},{entrance.Location.X + entrance.Size.Width},{entrance.Location.Y + entrance.Size.Height},{entrance.LevelID}"));
 
                 temp.Add("RPG.Objects.Door");
-                foreach (var door in Door.Doors)
-                {
-                    temp.Add($"{door.Location.X},{door.Location.Y},{door.Location.X + door.Size.Width},{door.Location.Y + door.Size.Height},{door.ID}");
-                }
+                temp.AddRange(Door.Doors.Select(door => $"{door.Location.X},{door.Location.Y},{door.Location.X + door.Size.Width},{door.Location.Y + door.Size.Height},{door.ID}"));
 
                 temp.Add("RPG.Objects.Key");
-                foreach (var key in Key.Keys)
-                {
-                    temp.Add($"{key.Location.X},{key.Location.Y},{key.Location.X + key.Size.Width},{key.Location.Y + key.Size.Height},{key.ID}");
-                }
+                temp.AddRange(Key.Keys.Select(key => $"{key.Location.X},{key.Location.Y},{key.Location.X + key.Size.Width},{key.Location.Y + key.Size.Height},{key.ID}"));
 
                 temp.Add("RPG.Objects.Floor");
-                foreach (var floor in Floor.Floors)
-                {
-                    temp.Add($"{floor.Location.X},{floor.Location.Y},{floor.Location.X + floor.Size.Width},{floor.Location.Y + floor.Size.Height},{floor.TextureID}");
-                }
+                temp.AddRange(Floor.Floors.Select(floor => $"{floor.Location.X},{floor.Location.Y},{floor.Location.X + floor.Size.Width},{floor.Location.Y + floor.Size.Height},{floor.TextureID}"));
                 File.WriteAllLines(saveFileDialog.FileName, temp);
             }
         }

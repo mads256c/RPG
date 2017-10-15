@@ -20,12 +20,12 @@ namespace RPG
 
         }
 
-        private void buttonLoadLevel_Click(object sender, EventArgs e)
+        private void ButtonLoadLevel_Click(object sender, EventArgs e)
         {
             Level.LoadLevel((int)numericUpDownLoadLevel.Value);
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             labelPlayerPosition.Text =
                 $"Player position: {FormOverworld.OverworldPlayer.Location.X}, {FormOverworld.OverworldPlayer.Location.Y}";

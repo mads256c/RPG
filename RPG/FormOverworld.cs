@@ -40,7 +40,7 @@ namespace RPG
 #endif //DEBUG
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             if ((direction & Direction.Up) == Direction.Up)
             {
