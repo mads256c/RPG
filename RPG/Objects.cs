@@ -208,6 +208,7 @@ namespace RPG.Objects
         }
     }
 
+    //TODO lav et bedre drawing system
     public class LevelObject : PictureBox
     {
         public static List<LevelObject> Objects = new List<LevelObject>();
