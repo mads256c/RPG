@@ -10,7 +10,14 @@ namespace RPG
     {
         public static string Name;
 
-        public static int Health = MaxHealth;
+        public static int Health
+        {
+            get => _health;
+
+            set => _health = value > MaxHealth ? MaxHealth : value;
+        }
+        private static int _health;
+
         public static int MaxHealth => Level * 15 + Defence * 5;
 
         public static int MP = MaxMP;

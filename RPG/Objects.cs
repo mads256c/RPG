@@ -146,7 +146,6 @@ namespace RPG.Objects
                 FormOverworld.SoundPlayer.Stream = Resources.testsound;
                 FormOverworld.SoundPlayer.Play();
                 Visible = false;
-                return true;
             }
             return false;
 
@@ -197,6 +196,56 @@ namespace RPG.Objects
         public override string GetDebugInfo()
         {
             return base.GetDebugInfo() + $", T:{_floorTexture}";
+        }
+    }
+
+    public sealed class HealthPotion : LevelObject
+    {
+        private enum PotionSize
+        {
+            Small = 0,
+            Medium = 1,
+            Big = 2,
+            Max = 3
+        }
+
+        private readonly PotionSize _potionSize;
+
+        public HealthPotion(int x1, int y1, int x2, int y2, int size) : base(x1, y1, x2, y2)
+        {
+            _potionSize = (PotionSize) size;
+            switch (_potionSize)
+            {
+                case PotionSize.Small:
+                    Image = Resources.SmallHealth;
+                    break;
+                case PotionSize.Medium:
+                    Image = Resources.MediumHealth;
+                    break;
+                case PotionSize.Big:
+                    Image = Resources.BigHealth;
+                    break;
+                case PotionSize.Max:
+                    Image = Resources.MaxHealth;
+                    break;
+            }
+
+
+        }
+
+        public override bool Intersects(Rectangle bounds)
+        {
+            if (Visible && base.Intersects(bounds))
+            {
+                Player.Health += (int)_potionSize / 4 * Player.MaxHealth;
+                Visible = false;
+            }
+            return false;
+        }
+
+        public override string GetDebugInfo()
+        {
+            return base.GetDebugInfo() + $", S:{_potionSize}, V:{Visible}";
         }
     }
 

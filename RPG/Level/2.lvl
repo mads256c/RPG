@@ -1,7 +1,6 @@
 Player
 145,11
 RPG.Objects.Wall
-99,0,134,111
 0,200,100,300
 100,192,135,300
 0,373,600,476
@@ -14,3 +13,5 @@ RPG.Objects.Door
 100,110,135,191,0
 RPG.Objects.Key
 0,300,60,373,0
+RPG.Objects.HealthPotion
+100,0,135,100,3

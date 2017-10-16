@@ -144,8 +144,12 @@
     <None Include="Resources\testsound.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\BigHealth.png" />
     <Content Include="Resources\Dirt.jpg" />
     <Content Include="Resources\Grass.jpg" />
+    <Content Include="Resources\MaxHealth.png" />
+    <Content Include="Resources\MediumHealth.png" />
+    <Content Include="Resources\SmallHealth.png" />
     <Content Include="Resources\Tiles.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

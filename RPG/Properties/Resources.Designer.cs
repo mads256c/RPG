@@ -63,6 +63,16 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BigHealth {
+            get {
+                object obj = ResourceManager.GetObject("BigHealth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Dirt {
             get {
                 object obj = ResourceManager.GetObject("Dirt", resourceCulture);
@@ -93,9 +103,39 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap MaxHealth {
+            get {
+                object obj = ResourceManager.GetObject("MaxHealth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap MediumHealth {
+            get {
+                object obj = ResourceManager.GetObject("MediumHealth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Player {
             get {
                 object obj = ResourceManager.GetObject("Player", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap SmallHealth {
+            get {
+                object obj = ResourceManager.GetObject("SmallHealth", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
