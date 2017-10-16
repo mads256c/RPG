@@ -18,11 +18,11 @@ namespace RPG
             progressBarPlayerHP.Maximum = Player.MaxHealth;
             progressBarPlayerHP.Value = Player.Health;
 
-            progressBarPlayerMP.Maximum = Player.MaxMP;
-            progressBarPlayerMP.Value = Player.MP;
+            progressBarPlayerMP.Maximum = Player.MaxMana;
+            progressBarPlayerMP.Value = Player.Mana;
 
-            progressBarPlayerXP.Maximum = Player.XPNeeded;
-            progressBarPlayerXP.Value = Player.XP;
+            progressBarPlayerXP.Maximum = Player.ExperienceNeeded;
+            progressBarPlayerXP.Value = Player.Experience;
 
         }
     }

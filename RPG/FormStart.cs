@@ -95,7 +95,7 @@ namespace RPG
             Player.Resistance = (int) numericUpDownResistance.Value;
 
             Player.Health = Player.MaxHealth;
-            Player.MP = Player.MaxMP;
+            Player.Mana = Player.MaxMana;
 
             Hide();
             new FormOverworld().ShowDialog();

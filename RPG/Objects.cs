@@ -199,22 +199,11 @@ namespace RPG.Objects
         }
     }
 
-    public sealed class HealthPotion : LevelObject
+    public sealed class HealthPotion : Potion
     {
-        private enum PotionSize
+        public HealthPotion(int x1, int y1, int x2, int y2, int size) : base(x1, y1, x2, y2, size)
         {
-            Small = 0,
-            Medium = 1,
-            Big = 2,
-            Max = 3
-        }
-
-        private readonly PotionSize _potionSize;
-
-        public HealthPotion(int x1, int y1, int x2, int y2, int size) : base(x1, y1, x2, y2)
-        {
-            _potionSize = (PotionSize) size;
-            switch (_potionSize)
+            switch (potionSize)
             {
                 case PotionSize.Small:
                     Image = Resources.SmallHealth;
@@ -229,32 +218,85 @@ namespace RPG.Objects
                     Image = Resources.MaxHealth;
                     break;
             }
-
-
         }
 
         public override bool Intersects(Rectangle bounds)
         {
             if (Visible && base.Intersects(bounds))
             {
-                Player.Health += (int)_potionSize / 4 * Player.MaxHealth;
+                Player.Health += (int)potionSize / 4 * Player.MaxHealth;
                 Visible = false;
             }
             return false;
         }
 
+    }
+
+    public sealed class ManaPotion : Potion
+    {
+        public ManaPotion(int x1, int y1, int x2, int y2, int size) : base(x1, y1, x2, y2, size)
+        {
+            switch (potionSize)
+            {
+                case PotionSize.Small:
+                    Image = Resources.SmallMana;
+                    break;
+                case PotionSize.Medium:
+                    Image = Resources.MediumMana;
+                    break;
+                case PotionSize.Big:
+                    Image = Resources.BigMana;
+                    break;
+                case PotionSize.Max:
+                    Image = Resources.MaxMana;
+                    break;
+            }
+        }
+
+        public override bool Intersects(Rectangle bounds)
+        {
+            if (Visible && base.Intersects(bounds))
+            {
+                Player.Mana += (int)potionSize / 4 * Player.MaxMana;
+                Visible = false;
+            }
+            return false;
+        }
+
+    }
+
+    //Gør klassen abstrakt så det ikke er muligt at lave en instans af klassen.
+    public abstract class Potion : LevelObject
+    {
+        public enum PotionSize
+        {
+            Small = 0,
+            Medium = 1,
+            Big = 2,
+            Max = 3
+        }
+
+        public readonly PotionSize potionSize;
+
+        protected Potion(int x1, int y1, int x2, int y2, int size) : base (x1, y1, x2, y2)
+        {
+            potionSize = (PotionSize) size;
+        }
+
         public override string GetDebugInfo()
         {
-            return base.GetDebugInfo() + $", S:{_potionSize}, V:{Visible}";
+            return base.GetDebugInfo() + $", S:{potionSize}, V:{Visible}";
         }
+
     }
 
     //TODO lav et bedre drawing system
-    public class LevelObject : PictureBox
+    //Gør klassen abstrakt så det ikke er muligt at lave en instans af klassen.
+    public abstract class LevelObject : PictureBox
     {
         public static List<LevelObject> Objects = new List<LevelObject>();
 
-        public LevelObject(int x1, int y1, int x2, int y2)
+        protected LevelObject(int x1, int y1, int x2, int y2)
         {
             Location = new Point(x1, y1);
             Size = new Size(x2 - x1, y2 - y1);

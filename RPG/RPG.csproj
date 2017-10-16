@@ -145,11 +145,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\BigHealth.png" />
+    <Content Include="Resources\BigMana.png" />
     <Content Include="Resources\Dirt.jpg" />
     <Content Include="Resources\Grass.jpg" />
     <Content Include="Resources\MaxHealth.png" />
+    <Content Include="Resources\MaxMana.png" />
     <Content Include="Resources\MediumHealth.png" />
+    <Content Include="Resources\MediumMana.png" />
     <Content Include="Resources\SmallHealth.png" />
+    <Content Include="Resources\SmallMana.png" />
     <Content Include="Resources\Tiles.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

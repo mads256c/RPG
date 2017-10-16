@@ -20,12 +20,12 @@ namespace RPG
 
         public static int MaxHealth => Level * 15 + Defence * 5;
 
-        public static int MP = MaxMP;
-        public static int MaxMP => Wisdom * 10;
+        public static int Mana = MaxMana;
+        public static int MaxMana => Wisdom * 10;
 
         public static int Level = 1;
-        public static int XP;
-        public static int XPNeeded => Level * 100;
+        public static int Experience;
+        public static int ExperienceNeeded => Level * 100;
 
         public static int Strength = 1;
         public static int Wisdom = 1;
