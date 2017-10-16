@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using RPG.Extensions;
 using RPG.Properties;
+using RPG.UI;
+using RPG.Weapons;
 
 namespace RPG.Objects
 {
@@ -16,6 +19,7 @@ namespace RPG.Objects
             BackColor = Color.White;
             Objects.Add(this);
         }
+
     }
 
     public sealed class Grass : LevelObject
@@ -32,7 +36,7 @@ namespace RPG.Objects
             Objects.Add(this);
         }
 
-        public override bool Intersects(Rectangle bounds)
+        public override bool IntersectsCollider(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds))
             {
@@ -66,7 +70,7 @@ namespace RPG.Objects
             Objects.Add(this);
         }
 
-        public override bool Intersects(Rectangle bounds)
+        public override bool IntersectsCollider(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds))
             {
@@ -109,9 +113,9 @@ namespace RPG.Objects
             Objects.Add(this);
         }
 
-        public override bool Intersects(Rectangle bounds)
+        public override bool IntersectsCollider(Rectangle bounds)
         {
-            return !Open && base.Intersects(bounds);
+            return !Open && base.IntersectsCollider(bounds);
         }
 
         public override string GetDebugInfo()
@@ -134,7 +138,7 @@ namespace RPG.Objects
             Objects.Add(this);
         }
 
-        public override bool Intersects(Rectangle bounds)
+        public override bool IntersectsCollider(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds) && Visible)
             {
@@ -191,7 +195,7 @@ namespace RPG.Objects
             Objects.Add(this);
         }
 
-        public override bool Intersects(Rectangle bounds) => false;
+        public override bool IntersectsCollider(Rectangle bounds) => false;
 
         public override string GetDebugInfo()
         {
@@ -201,7 +205,7 @@ namespace RPG.Objects
 
     public sealed class HealthPotion : Potion
     {
-        public HealthPotion(int x1, int y1, int x2, int y2, int size) : base(x1, y1, x2, y2, size)
+        public HealthPotion(int x, int y, int size) : base(x, y, size)
         {
             switch (potionSize)
             {
@@ -220,9 +224,9 @@ namespace RPG.Objects
             }
         }
 
-        public override bool Intersects(Rectangle bounds)
+        public override bool IntersectsCollider(Rectangle bounds)
         {
-            if (Visible && base.Intersects(bounds))
+            if (Visible && base.IntersectsCollider(bounds))
             {
                 Player.Health += (int)potionSize / 4 * Player.MaxHealth;
                 Visible = false;
@@ -234,7 +238,7 @@ namespace RPG.Objects
 
     public sealed class ManaPotion : Potion
     {
-        public ManaPotion(int x1, int y1, int x2, int y2, int size) : base(x1, y1, x2, y2, size)
+        public ManaPotion(int x, int y, int size) : base(x, y, size)
         {
             switch (potionSize)
             {
@@ -253,9 +257,9 @@ namespace RPG.Objects
             }
         }
 
-        public override bool Intersects(Rectangle bounds)
+        public override bool IntersectsCollider(Rectangle bounds)
         {
-            if (Visible && base.Intersects(bounds))
+            if (Visible && base.IntersectsCollider(bounds))
             {
                 Player.Mana += (int)potionSize / 4 * Player.MaxMana;
                 Visible = false;
@@ -278,7 +282,7 @@ namespace RPG.Objects
 
         public readonly PotionSize potionSize;
 
-        protected Potion(int x1, int y1, int x2, int y2, int size) : base (x1, y1, x2, y2)
+        protected Potion(int x, int y, int size) : base (x, y, x + 32, y + 32)
         {
             potionSize = (PotionSize) size;
         }
@@ -286,6 +290,44 @@ namespace RPG.Objects
         public override string GetDebugInfo()
         {
             return base.GetDebugInfo() + $", S:{potionSize}, V:{Visible}";
+        }
+
+    }
+
+    public sealed class WeaponChest : Chest
+    {
+        public ChestItem ChestItem;
+
+        public Weapon Weapon;
+
+        public WeaponChest(int x, int y) : base(x, y)
+        {
+            Image = Resources.WeaponChest;
+            Weapon = Weapon.GenerateWeapon();
+        }
+
+        public override void IntersectsPlayer(Rectangle bounds)
+        {
+            if (TriggerBounds.IntersectsWith(bounds))
+            {
+
+                if (ChestItem == null)
+                    ChestItem = new ChestItem(Location.X, Location.Y, Weapon.LongName, Weapon.GetWeaponDescription(), Resources.SmallHealth);
+            }
+            else
+            {
+                ChestItem?.Dispose();
+                ChestItem = null;
+            }
+        }
+    }
+
+    public abstract class Chest : LevelObject
+    {
+        protected Rectangle TriggerBounds;
+        protected Chest(int x, int y) : base(x, y, x + 32, y + 32)
+        {
+            TriggerBounds = new Rectangle(x - 48, y - 48, 96, 96);
         }
 
     }
@@ -303,9 +345,14 @@ namespace RPG.Objects
             Objects.Add(this);
         }
 
-        public virtual bool Intersects(Rectangle bounds)
+        public virtual bool IntersectsCollider(Rectangle bounds)
         {
             return Bounds.IntersectsWith(bounds);
+        }
+
+        public virtual void IntersectsPlayer(Rectangle bounds)
+        {
+
         }
 
         public virtual string GetDebugInfo()

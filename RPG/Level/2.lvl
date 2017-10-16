@@ -13,5 +13,5 @@ RPG.Objects.Door
 100,110,135,191,0
 RPG.Objects.Key
 0,300,60,373,0
-RPG.Objects.HealthPotion
-100,0,135,100,3
+RPG.Objects.WeaponChest
+100,0

@@ -50,7 +50,8 @@ namespace RPG
 
         public void MoveUp()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_topCollision)) | Location.Y <= 0)
+            UpdatePlayer();
+            if (LevelObject.Objects.Any(levelObject => levelObject.IntersectsCollider(_topCollision)) | Location.Y <= 0)
             {
                 return;
             }
@@ -61,7 +62,8 @@ namespace RPG
 
         public void MoveDown()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_bottomCollision)) | Location.Y + Size.Height > FormOverworld.Instance.ClientSize.Height)
+            UpdatePlayer();
+            if (LevelObject.Objects.Any(levelObject => levelObject.IntersectsCollider(_bottomCollision)) | Location.Y + Size.Height > FormOverworld.Instance.ClientSize.Height)
             {
                 return;
             }
@@ -71,7 +73,8 @@ namespace RPG
 
         public void MoveRight()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_rightCollision)) | Location.X + Size.Width > FormOverworld.Instance.ClientSize.Width)
+            UpdatePlayer();
+            if (LevelObject.Objects.Any(levelObject => levelObject.IntersectsCollider(_rightCollision)) | Location.X + Size.Width > FormOverworld.Instance.ClientSize.Width)
             {
                 return;
             }
@@ -81,7 +84,8 @@ namespace RPG
 
         public void MoveLeft()
         {
-            if (LevelObject.Objects.Any(levelObject => levelObject.Intersects(_leftCollision)) | Location.X < 0)
+            UpdatePlayer();
+            if (LevelObject.Objects.Any(levelObject => levelObject.IntersectsCollider(_leftCollision)) | Location.X < 0)
             {
                 return;
             }
@@ -95,6 +99,14 @@ namespace RPG
             _bottomCollision.Location = new Point(Location.X, Location.Y + Size.Height);
             _rightCollision.Location = new Point(Location.X + Size.Width, Location.Y);
             _leftCollision.Location = new Point(Location.X - 1, Location.Y);
+        }
+
+        public void UpdatePlayer()
+        {
+            foreach (var levelObject in LevelObject.Objects)
+            {
+                levelObject.IntersectsPlayer(Bounds);
+            }
         }
 
 

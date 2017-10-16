@@ -5,7 +5,7 @@ namespace RPG
 {
     public static class NameGeneration
     {
-        public static readonly string[] PositiveAdjektives = 
+        private static readonly string[] PositiveAdjektives = 
         {
             "Brillant",
             "Fabelagtig",
@@ -17,18 +17,18 @@ namespace RPG
             "Sylespids"
         };
 
-        public static readonly string[] NormalAdjektives =
+        private static readonly string[] NormalAdjektives =
         {
             "Okay",
             "Nogenlunde",
-            "Godt",
+            "God",
             "Rimelig",
             "Fin",
             "Acceptabel",
             "Skarp"
         };
 
-        public static readonly string[] NegativeAdjektives =
+        private static readonly string[] NegativeAdjektives =
         {
             "Dårlig",
             "Svagt",
@@ -52,6 +52,81 @@ namespace RPG
                 return $"{NormalAdjektives[RandomGenerator.Random.Next(NormalAdjektives.Length)]} {weapon.Name}";
             }
             return $"{NegativeAdjektives[RandomGenerator.Random.Next(NegativeAdjektives.Length)]} {weapon.Name}";
+        }
+
+        private static readonly string[] PlayerPrepend =
+        {
+            "Lille",
+            "Store",
+            "Farlige",
+            "Troldmanden",
+            "Krigeren",
+            "Onde",
+            "Tyven",
+            "Dakmand",
+            "Røvhullet",
+            "Postmand",
+            "Naren",
+            "Knejten",
+            "Orken",
+            "Gnomen",
+            ""
+        };
+
+        private static readonly string[] PlayerNames =
+        {
+            "John",
+            "Per",
+            "Mogens",
+            "Karl",
+            "Christian",
+            "Nikolaj",
+            "Mads",
+            "Rasmus",
+            "Tobias",
+            "Meller",
+            "Stella",
+            "Anne-Sofie",
+            "Anne",
+            "Mette",
+            "Martin",
+            "Emil",
+            "Lene",
+            "Bonde",
+            "Patrik",
+            "Kasper",
+            "John Hitler",
+            ""
+        };
+
+        private static readonly string[] PlayerAppend =
+        {
+            "Den Lille",
+            "Den Onde",
+            "Den Gode",
+            "Den Store",
+            "Den Farlige",
+            "Mogens",
+            "Dak Lytter",
+            "Sværdsvinger",
+            "Fodboldmester",
+            "Den tredje",
+            "Den fjerde",
+            "Den Dumme",
+            "Den Kloge",
+            "Den Tynde",
+            "Den Tykke",
+            "Den Svage",
+            "Den Stærke",
+            "Korytter",
+            "Den modige",
+            ""
+        };
+
+        public static string PlayerName()
+        {
+            return
+                $"{PlayerPrepend[RandomGenerator.Random.Next(PlayerPrepend.Length)]} {PlayerNames[RandomGenerator.Random.Next(PlayerNames.Length)]} {PlayerAppend[RandomGenerator.Random.Next(PlayerAppend.Length)]}";
         }
     }
 }

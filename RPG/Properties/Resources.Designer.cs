@@ -163,6 +163,16 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap PotionChest {
+            get {
+                object obj = ResourceManager.GetObject("PotionChest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap SmallHealth {
             get {
                 object obj = ResourceManager.GetObject("SmallHealth", resourceCulture);
@@ -195,6 +205,16 @@ namespace RPG.Properties {
         public static System.Drawing.Bitmap Tiles {
             get {
                 object obj = ResourceManager.GetObject("Tiles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap WeaponChest {
+            get {
+                object obj = ResourceManager.GetObject("WeaponChest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

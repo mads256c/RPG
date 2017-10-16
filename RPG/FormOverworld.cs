@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Media;
+using System.Threading;
 using System.Windows.Forms;
+using RPG.Properties;
+using RPG.UI;
 
 namespace RPG
 {
@@ -14,7 +17,10 @@ namespace RPG
             Instance = this;
             Level.LoadLevel(5);
             Controls.Add(OverworldPlayer);
+            //ChestItem = new ChestItem(150, 150, "Title", "Description", Resources.BigHealth);
         }
+
+        public static ChestItem ChestItem;
 
         public static FormOverworld Instance;
 
