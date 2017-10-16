@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using RPG.Extensions;
 using RPG.Objects;
+using RPG.Weapons;
 
 namespace RPG
 {
@@ -14,7 +15,6 @@ namespace RPG
             treeViewObjects.Nodes.Clear();
             foreach (var obj in InheritedClassEnumerator.GetListOfInheritedClasses<LevelObject>())
             {
-                Logger.WriteLine(obj);
                 treeViewObjects.Nodes.Add(obj);
             }
             timer.Start();

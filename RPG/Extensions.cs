@@ -61,4 +61,9 @@ namespace RPG.Extensions
             return objects;
         }
     }
+
+    public static class RandomGenerator
+    {
+        public static Random Random = new Random();
+    }
 }

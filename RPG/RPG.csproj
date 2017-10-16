@@ -75,12 +75,14 @@
     </Compile>
     <Compile Include="Level.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="NameGeneration.cs" />
     <Compile Include="Objects.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Weapons.cs" />
     <EmbeddedResource Include="FormBattle.resx">
       <DependentUpon>FormBattle.cs</DependentUpon>
     </EmbeddedResource>
