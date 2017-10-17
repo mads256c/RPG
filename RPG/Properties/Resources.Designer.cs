@@ -22,7 +22,7 @@ namespace RPG.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace RPG.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RPG.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace RPG.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,17 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap BigHealth {
+        internal static System.Drawing.Bitmap Axe {
+            get {
+                object obj = ResourceManager.GetObject("Axe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BigHealth {
             get {
                 object obj = ResourceManager.GetObject("BigHealth", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +83,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap BigMana {
+        internal static System.Drawing.Bitmap BigMana {
             get {
                 object obj = ResourceManager.GetObject("BigMana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +93,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Dirt {
+        internal static System.Drawing.Bitmap Dirt {
             get {
                 object obj = ResourceManager.GetObject("Dirt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +103,17 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Grass {
+        internal static System.Drawing.Bitmap Frame {
+            get {
+                object obj = ResourceManager.GetObject("Frame", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grass {
             get {
                 object obj = ResourceManager.GetObject("Grass", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +123,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Key {
+        internal static System.Drawing.Bitmap Key {
             get {
                 object obj = ResourceManager.GetObject("Key", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +133,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap MaxHealth {
+        internal static System.Drawing.Bitmap MaxHealth {
             get {
                 object obj = ResourceManager.GetObject("MaxHealth", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +143,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap MaxMana {
+        internal static System.Drawing.Bitmap MaxMana {
             get {
                 object obj = ResourceManager.GetObject("MaxMana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +153,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap MediumHealth {
+        internal static System.Drawing.Bitmap MediumHealth {
             get {
                 object obj = ResourceManager.GetObject("MediumHealth", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +163,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap MediumMana {
+        internal static System.Drawing.Bitmap MediumMana {
             get {
                 object obj = ResourceManager.GetObject("MediumMana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +173,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Player {
+        internal static System.Drawing.Bitmap Player {
             get {
                 object obj = ResourceManager.GetObject("Player", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +183,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap PotionChest {
+        internal static System.Drawing.Bitmap PotionChest {
             get {
                 object obj = ResourceManager.GetObject("PotionChest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +193,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap SmallHealth {
+        internal static System.Drawing.Bitmap SmallHealth {
             get {
                 object obj = ResourceManager.GetObject("SmallHealth", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +203,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap SmallMana {
+        internal static System.Drawing.Bitmap SmallMana {
             get {
                 object obj = ResourceManager.GetObject("SmallMana", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -191,9 +211,19 @@ namespace RPG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sword {
+            get {
+                object obj = ResourceManager.GetObject("Sword", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static System.IO.UnmanagedMemoryStream testsound {
+        internal static System.IO.UnmanagedMemoryStream testsound {
             get {
                 return ResourceManager.GetStream("testsound", resourceCulture);
             }
@@ -202,7 +232,7 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Tiles {
+        internal static System.Drawing.Bitmap Tiles {
             get {
                 object obj = ResourceManager.GetObject("Tiles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -212,7 +242,17 @@ namespace RPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponChest {
+        internal static System.Drawing.Bitmap Wand {
+            get {
+                object obj = ResourceManager.GetObject("Wand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WeaponChest {
             get {
                 object obj = ResourceManager.GetObject("WeaponChest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

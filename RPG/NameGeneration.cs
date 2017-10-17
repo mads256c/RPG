@@ -45,13 +45,13 @@ namespace RPG
         {
             if (damage > 7)
             {
-                return $"{PositiveAdjektives[RandomGenerator.Random.Next(PositiveAdjektives.Length)]} {weapon.Name}";
+                return PositiveAdjektives[RandomGenerator.Random.Next(PositiveAdjektives.Length)];
             }
             if (damage > 3 && damage < 8)
             {
-                return $"{NormalAdjektives[RandomGenerator.Random.Next(NormalAdjektives.Length)]} {weapon.Name}";
+                return NormalAdjektives[RandomGenerator.Random.Next(NormalAdjektives.Length)];
             }
-            return $"{NegativeAdjektives[RandomGenerator.Random.Next(NegativeAdjektives.Length)]} {weapon.Name}";
+            return NegativeAdjektives[RandomGenerator.Random.Next(NegativeAdjektives.Length)];
         }
 
         private static readonly string[] PlayerPrepend =

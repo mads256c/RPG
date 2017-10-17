@@ -292,12 +292,18 @@ namespace RPG.Objects
             return base.GetDebugInfo() + $", S:{potionSize}, V:{Visible}";
         }
 
+        public static Potion GeneratePotion()
+        {
+            List<string> potions = InheritedClassEnumerator.GetListOfInheritedClasses<Potion>();
+
+            return (Potion)Activator.CreateInstance(Type.GetType(potions[RandomGenerator.Random.Next(potions.Count)]) ?? throw new ArgumentNullException(), 0, 0, RandomGenerator.Random.Next(4));
+
+        }
+
     }
 
     public sealed class WeaponChest : Chest
     {
-        public ChestItem ChestItem;
-
         public Weapon Weapon;
 
         public WeaponChest(int x, int y) : base(x, y)
@@ -312,7 +318,33 @@ namespace RPG.Objects
             {
 
                 if (ChestItem == null)
-                    ChestItem = new ChestItem(Location.X, Location.Y, Weapon.LongName, Weapon.GetWeaponDescription(), Resources.SmallHealth);
+                    ChestItem = new ChestItem(Location.X, Location.Y, "Våbenkiste", Weapon.GetWeaponImage(), Weapon.GetWeaponLongName(), Weapon.GetWeaponDescription(), "Tryk mellemrum for at bytte våben");
+            }
+            else
+            {
+                ChestItem?.Dispose();
+                ChestItem = null;
+            }
+        }
+    }
+
+    public sealed class PotionChest : Chest
+    {
+        public Potion Potion;
+
+        public PotionChest(int x, int y) : base(x, y)
+        {
+            Image = Resources.PotionChest;
+            Potion = Potion.GeneratePotion();
+        }
+
+        public override void IntersectsPlayer(Rectangle bounds)
+        {
+            if (TriggerBounds.IntersectsWith(bounds))
+            {
+
+                if (ChestItem == null)
+                    ChestItem = new ChestItem(Location.X, Location.Y, "Våbenkiste", Potion.Image, Enum.GetName(Potion.potionSize.GetType(), Potion.potionSize) + " Potion", nameof(Potion), "Tryk mellemrum for at bytte våben");
             }
             else
             {
@@ -324,6 +356,8 @@ namespace RPG.Objects
 
     public abstract class Chest : LevelObject
     {
+        protected ChestItem ChestItem;
+
         protected Rectangle TriggerBounds;
         protected Chest(int x, int y) : base(x, y, x + 32, y + 32)
         {

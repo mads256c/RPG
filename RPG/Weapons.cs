@@ -1,46 +1,105 @@
 ﻿using System;
+using System.Drawing;
 using RPG.Extensions;
+using RPG.Properties;
 
 namespace RPG.Weapons
 {
     public sealed class Sword : Weapon
     {
-        public Sword(string name, int damage) : base(name, damage, damage)
+        public Sword(string prepend, int damage) : base(prepend, damage, damage)
         {
-            Name = "Sværd";
+
+        }
+
+        public override Image GetWeaponImage()
+        {
+            return Resources.Sword;
+        }
+
+        public override string GetWeaponName()
+        {
+            return "Sværd";
+        }
+
+        public override string GetWeaponLongName()
+        {
+            return $"{Prepend}t {GetWeaponName()}";
+        }
+
+        public override string GetWeaponDescription()
+        {
+            return $"Et {GetWeaponLongName()}{Environment.NewLine}{base.GetWeaponDescription()}";
         }
     }
 
     public sealed class Axe : Weapon
     {
-        public Axe(string name, int damage) : base(name, damage * 2, 1 / 2  * damage)
+        public Axe(string prepend, int damage) : base(prepend, damage * 2, (int)(1f / 2f * (float)damage))
         {
-            Name = "Økse";
+
+        }
+
+        public override Image GetWeaponImage()
+        {
+            return Resources.Axe;
+        }
+
+        public override string GetWeaponName()
+        {
+            return "Økse";
+        }
+
+        public override string GetWeaponDescription()
+        {
+            return $"En {Prepend} {GetWeaponName()}{Environment.NewLine}{base.GetWeaponDescription()}";
         }
     }
 
     public sealed class Wand : Weapon
     {
-        public Wand(string name, int damage) : base(name,  1 / 2 * damage , damage * 2)
+        public Wand(string prepend, int damage) : base(prepend, (int)(1f / 2f * (float)damage) , damage * 2)
         {
-            Name = "Tryllestav";
+
+        }
+
+        public override Image GetWeaponImage()
+        {
+            return Resources.Wand;
+        }
+
+        public override string GetWeaponName()
+        {
+            return "Tryllestav";
+        }
+
+        public override string GetWeaponDescription()
+        {
+            return $"En {Prepend} {GetWeaponName()}{Environment.NewLine}{base.GetWeaponDescription()}";
         }
     }
 
     public abstract class Weapon
     {
-        public string LongName;
-
-        public string Name;
-
         public int PhysicalDamage;
         public int MagicalDamage;
 
-        protected Weapon(string name, int physicalDamage, int magicalDamage)
+        protected string Prepend;
+
+        protected Weapon(string prepend, int physicalDamage, int magicalDamage)
         {
-            LongName = name;
+            Prepend = prepend;
             PhysicalDamage = physicalDamage;
             MagicalDamage = magicalDamage;
+        }
+
+        public abstract Image GetWeaponImage();
+
+        public abstract string GetWeaponName();
+
+        public virtual string GetWeaponLongName()
+        {
+            return $"{Prepend} {GetWeaponName()}";
         }
 
         public virtual string GetWeaponDescription()

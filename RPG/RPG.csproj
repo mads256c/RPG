@@ -73,12 +73,6 @@
     <Compile Include="FormStart.Designer.cs">
       <DependentUpon>FormStart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormTest.Designer.cs">
-      <DependentUpon>FormTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Level.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="NameGeneration.cs" />
@@ -88,6 +82,11 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI.cs" />
     <Compile Include="Weapons.cs" />
     <EmbeddedResource Include="FormBattle.resx">
@@ -95,6 +94,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDebug.resx">
       <DependentUpon>FormDebug.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOverworld.resx">
       <DependentUpon>FormOverworld.cs</DependentUpon>
@@ -102,19 +102,10 @@
     <EmbeddedResource Include="FormStart.resx">
       <DependentUpon>FormStart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormTest.resx">
-      <DependentUpon>FormTest.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Level\1.lvl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -144,9 +135,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Key.png" />
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +144,11 @@
     <None Include="Resources\testsound.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Axe.png" />
     <Content Include="Resources\BigHealth.png" />
     <Content Include="Resources\BigMana.png" />
     <Content Include="Resources\Dirt.jpg" />
+    <Content Include="Resources\Frame.png" />
     <Content Include="Resources\Grass.jpg" />
     <Content Include="Resources\MaxHealth.png" />
     <Content Include="Resources\MaxMana.png" />
@@ -167,7 +157,9 @@
     <Content Include="Resources\PotionChest.png" />
     <Content Include="Resources\SmallHealth.png" />
     <Content Include="Resources\SmallMana.png" />
+    <Content Include="Resources\Sword.png" />
     <Content Include="Resources\Tiles.png" />
+    <Content Include="Resources\Wand.png" />
     <Content Include="Resources\WeaponChest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

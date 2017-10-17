@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using RPG.Extensions;
+using RPG.Properties;
 
 namespace RPG.UI
 {
@@ -15,19 +17,23 @@ namespace RPG.UI
 
         public Label ItemDescription;
 
-        public ChestItem(int x, int y, string title, string description, Image image)
+        public Label HelpText;
+
+        public ChestItem(int x, int y, string title, Image image, string weaponTitle, string weaponDescription, string help)
         {
             GroupBox = new GroupBox
             {
-                Text = "Chest",
+                Text = title,
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Location = new Point(Math.Max(x, 0), Math.Max(y, 0)),
+                Location = new Point(MathExtension.Clamp(x, 0, FormOverworld.Instance.ClientSize.Width), MathExtension.Clamp(y, 0, FormOverworld.Instance.ClientSize.Height)),
                 Size = new Size(300, 100)
             };
 
             ItemBox = new PictureBox
             {
+                BackColor = Color.Black,
+                BackgroundImage = Resources.Frame,
                 Image = image,
                 SizeMode = PictureBoxSizeMode.CenterImage,
                 Location = new Point(15, 15),
@@ -36,18 +42,28 @@ namespace RPG.UI
 
             ItemTitle = new Label
             {
-                Text = title,
+                Text = weaponTitle,
                 Location = new Point(100, 15),
+                Size = new Size(GroupBox.Size.Width - 100 - 15, 15)
             };
+
+            ItemTitle.Font = new Font(ItemTitle.Font, FontStyle.Bold);
 
             ItemDescription = new Label
             {
-                Text = description,
+                Text = weaponDescription,
                 Location = new Point(100, 45),
-                Size = new Size(GroupBox.Size.Width - 100 - 15, GroupBox.Size.Height - 45 - 15)
+                Size = new Size(GroupBox.Size.Width - 100 - 15, 15)
             };
 
-            GroupBox.Controls.AddRange(new Control[]{ItemBox, ItemTitle, ItemDescription});
+            HelpText = new Label
+            {
+                Text = help,
+                Location = new Point(100, 75),
+                Size = new Size(GroupBox.Size.Width - 100 - 15, 15)
+            };
+
+            GroupBox.Controls.AddRange(new Control[]{ItemBox, ItemTitle, ItemDescription, HelpText});
             FormOverworld.Instance.Controls.Add(GroupBox);
             GroupBox.BringToFront();
 
@@ -59,8 +75,8 @@ namespace RPG.UI
             ItemBox.Dispose();
             ItemTitle.Dispose();
             ItemDescription.Dispose();
+            HelpText.Dispose();
             GroupBox.Dispose();
-            Logger.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
         }
     }
 }

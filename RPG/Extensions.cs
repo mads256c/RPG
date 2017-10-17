@@ -62,8 +62,20 @@ namespace RPG.Extensions
         }
     }
 
+    //Lavet af mig
     public static class RandomGenerator
     {
         public static Random Random = new Random();
     }
+
+    //Lavet af mig
+    public static class MathExtension
+    {
+
+        public static int Clamp(int value, int min, int max)
+        {
+            return Math.Max(min, Math.Min(value, max));
+        }
+    }
+
 }
