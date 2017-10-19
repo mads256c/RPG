@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using RPG.Extensions;
+using RPG.Potions;
 using RPG.Properties;
 using RPG.UI;
 using RPG.Weapons;
@@ -203,101 +204,49 @@ namespace RPG.Objects
         }
     }
 
-    public sealed class HealthPotion : Potion
+    public sealed class HealthPotionLevelObject : PotionLevelObject
     {
-        public HealthPotion(int x, int y, int size) : base(x, y, size)
+        public HealthPotionLevelObject(int x, int y, int size) : base(x, y)
         {
-            switch (potionSize)
-            {
-                case PotionSize.Small:
-                    Image = Resources.SmallHealth;
-                    break;
-                case PotionSize.Medium:
-                    Image = Resources.MediumHealth;
-                    break;
-                case PotionSize.Big:
-                    Image = Resources.BigHealth;
-                    break;
-                case PotionSize.Max:
-                    Image = Resources.MaxHealth;
-                    break;
-            }
-        }
-
-        public override bool IntersectsCollider(Rectangle bounds)
-        {
-            if (Visible && base.IntersectsCollider(bounds))
-            {
-                Player.Health += (int)potionSize / 4 * Player.MaxHealth;
-                Visible = false;
-            }
-            return false;
+            Potion = new HealthPotion((Potion.PotionSize)size);
+            Image = Potion.GetImage();
+            SizeMode = PictureBoxSizeMode.CenterImage;
         }
 
     }
 
-    public sealed class ManaPotion : Potion
+    public sealed class ManaPotionLevelObject : PotionLevelObject
     {
-        public ManaPotion(int x, int y, int size) : base(x, y, size)
+        public ManaPotionLevelObject(int x, int y, int size) : base(x, y)
         {
-            switch (potionSize)
-            {
-                case PotionSize.Small:
-                    Image = Resources.SmallMana;
-                    break;
-                case PotionSize.Medium:
-                    Image = Resources.MediumMana;
-                    break;
-                case PotionSize.Big:
-                    Image = Resources.BigMana;
-                    break;
-                case PotionSize.Max:
-                    Image = Resources.MaxMana;
-                    break;
-            }
+            Potion = new ManaPotion((Potion.PotionSize)size);
+            Image = Potion.GetImage();
+            SizeMode = PictureBoxSizeMode.CenterImage;
         }
-
-        public override bool IntersectsCollider(Rectangle bounds)
-        {
-            if (Visible && base.IntersectsCollider(bounds))
-            {
-                Player.Mana += (int)potionSize / 4 * Player.MaxMana;
-                Visible = false;
-            }
-            return false;
-        }
-
     }
 
     //Gør klassen abstrakt så det ikke er muligt at lave en instans af klassen.
-    public abstract class Potion : LevelObject
+    public abstract class PotionLevelObject : LevelObject
     {
-        public enum PotionSize
-        {
-            Small = 0,
-            Medium = 1,
-            Big = 2,
-            Max = 3
-        }
+        public Potion Potion;
 
-        public readonly PotionSize potionSize;
-
-        protected Potion(int x, int y, int size) : base (x, y, x + 32, y + 32)
+        protected PotionLevelObject(int x, int y) : base (x, y, x + 32, y + 32)
         {
-            potionSize = (PotionSize) size;
+
         }
 
         public override string GetDebugInfo()
         {
-            return base.GetDebugInfo() + $", S:{potionSize}, V:{Visible}";
+            return base.GetDebugInfo() + $", S:{Potion.potionSize}, V:{Visible}";
         }
 
-        public static Potion GeneratePotion()
+        public override void IntersectsPlayer(Rectangle bounds)
         {
-            List<string> potions = InheritedClassEnumerator.GetListOfInheritedClasses<Potion>();
-
-            return (Potion)Activator.CreateInstance(Type.GetType(potions[RandomGenerator.Random.Next(potions.Count)]) ?? throw new ArgumentNullException(), 0, 0, RandomGenerator.Random.Next(4));
-
+            if (Visible && Bounds.IntersectsWith(bounds))
+            {
+                Potion.ApplyEffect();
+                Visible = false;
+            }
         }
 
     }
@@ -317,13 +266,17 @@ namespace RPG.Objects
             if (TriggerBounds.IntersectsWith(bounds))
             {
 
-                if (ChestItem == null)
-                    ChestItem = new ChestItem(Location.X, Location.Y, "Våbenkiste", Weapon.GetWeaponImage(), Weapon.GetWeaponLongName(), Weapon.GetWeaponDescription(), "Tryk mellemrum for at bytte våben");
+                if (ChestUi == null)
+                {
+                    ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste", Weapon.GetWeaponImage(), Weapon.GetWeaponLongName(), Weapon.GetWeaponDescription(),
+                        "Tryk mellemrum for at bytte våben." );
+                    ChestUi = new ChestUi(chestUiInfo);
+                }
             }
             else
             {
-                ChestItem?.Dispose();
-                ChestItem = null;
+                ChestUi?.Dispose();
+                ChestUi = null;
             }
         }
     }
@@ -343,20 +296,25 @@ namespace RPG.Objects
             if (TriggerBounds.IntersectsWith(bounds))
             {
 
-                if (ChestItem == null)
-                    ChestItem = new ChestItem(Location.X, Location.Y, "Våbenkiste", Potion.Image, Enum.GetName(Potion.potionSize.GetType(), Potion.potionSize) + " Potion", nameof(Potion), "Tryk mellemrum for at bytte våben");
+                if (ChestUi == null)
+                {
+                    ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Elexirkiste", Potion.GetImage(),
+                        Potion.GetLongName(), Potion.GetDescription(),
+                        "Tryk mellemrum for at drikke elexiren.");
+                    ChestUi = new ChestUi(chestUiInfo);
+                }
             }
             else
             {
-                ChestItem?.Dispose();
-                ChestItem = null;
+                ChestUi?.Dispose();
+                ChestUi = null;
             }
         }
     }
 
     public abstract class Chest : LevelObject
     {
-        protected ChestItem ChestItem;
+        protected ChestUi ChestUi;
 
         protected Rectangle TriggerBounds;
         protected Chest(int x, int y) : base(x, y, x + 32, y + 32)

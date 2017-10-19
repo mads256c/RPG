@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Forms;
 using RPG.Extensions;
@@ -7,26 +8,44 @@ using RPG.Properties;
 
 namespace RPG.UI
 {
-    public class ChestItem
+    public class ChestUi
     {
+        public struct ChestUiInfo
+        {
+            public ChestUiInfo(Point location, string title, Image image, string itemTitle, string description,
+                string helpText)
+            {
+                Location = location;
+                Title = title;
+                Image = image;
+                ItemTitle = itemTitle;
+                Description = description;
+                HelpText = helpText;
+            }
+
+            public Point Location;
+            public string Title;
+            public Image Image;
+            public string ItemTitle;
+            public string Description;
+            public string HelpText;
+        }
+
+
         public GroupBox GroupBox;
-
         public PictureBox ItemBox;
-
         public Label ItemTitle;
-
         public Label ItemDescription;
-
         public Label HelpText;
 
-        public ChestItem(int x, int y, string title, Image image, string weaponTitle, string weaponDescription, string help)
+        public ChestUi(ChestUiInfo chestUiInfo)
         {
             GroupBox = new GroupBox
             {
-                Text = title,
+                Text = chestUiInfo.Title,
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Location = new Point(MathExtension.Clamp(x, 0, FormOverworld.Instance.ClientSize.Width), MathExtension.Clamp(y, 0, FormOverworld.Instance.ClientSize.Height)),
+                Location = new Point(MathExtension.Clamp(chestUiInfo.Location.X, 0, FormOverworld.Instance.ClientSize.Width), MathExtension.Clamp(chestUiInfo.Location.Y, 0, FormOverworld.Instance.ClientSize.Height)),
                 Size = new Size(300, 100)
             };
 
@@ -34,7 +53,7 @@ namespace RPG.UI
             {
                 BackColor = Color.Black,
                 BackgroundImage = Resources.Frame,
-                Image = image,
+                Image = chestUiInfo.Image,
                 SizeMode = PictureBoxSizeMode.CenterImage,
                 Location = new Point(15, 15),
                 Size = new Size(75, 75)
@@ -42,7 +61,7 @@ namespace RPG.UI
 
             ItemTitle = new Label
             {
-                Text = weaponTitle,
+                Text = chestUiInfo.ItemTitle,
                 Location = new Point(100, 15),
                 Size = new Size(GroupBox.Size.Width - 100 - 15, 15)
             };
@@ -51,14 +70,14 @@ namespace RPG.UI
 
             ItemDescription = new Label
             {
-                Text = weaponDescription,
+                Text = chestUiInfo.Description,
                 Location = new Point(100, 45),
-                Size = new Size(GroupBox.Size.Width - 100 - 15, 15)
+                Size = new Size(GroupBox.Size.Width - 100 - 15, 30)
             };
 
             HelpText = new Label
             {
-                Text = help,
+                Text = chestUiInfo.HelpText,
                 Location = new Point(100, 75),
                 Size = new Size(GroupBox.Size.Width - 100 - 15, 15)
             };

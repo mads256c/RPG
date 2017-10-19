@@ -5,9 +5,9 @@ using RPG.Properties;
 
 namespace RPG.Weapons
 {
-    public sealed class Sword : Weapon
+    public sealed class SwordWeapon : Weapon
     {
-        public Sword(string prepend, int damage) : base(prepend, damage, damage)
+        public SwordWeapon(string prepend, int damage) : base(prepend, damage, damage)
         {
 
         }
@@ -33,9 +33,9 @@ namespace RPG.Weapons
         }
     }
 
-    public sealed class Axe : Weapon
+    public sealed class AxeWeapon : Weapon
     {
-        public Axe(string prepend, int damage) : base(prepend, damage * 2, (int)(1f / 2f * (float)damage))
+        public AxeWeapon(string prepend, int damage) : base(prepend, damage * 2, (int)(1f / 2f * (float)damage))
         {
 
         }
@@ -56,9 +56,9 @@ namespace RPG.Weapons
         }
     }
 
-    public sealed class Wand : Weapon
+    public sealed class WandWeapon : Weapon
     {
-        public Wand(string prepend, int damage) : base(prepend, (int)(1f / 2f * (float)damage) , damage * 2)
+        public WandWeapon(string prepend, int damage) : base(prepend, (int)(1f / 2f * (float)damage) , damage * 2)
         {
 
         }

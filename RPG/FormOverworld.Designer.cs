@@ -28,15 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 1;
-            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // FormOverworld
             // 
@@ -50,15 +42,11 @@
             this.Name = "FormOverworld";
             this.Text = "RPG";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormOverworld_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormOverworld_KeyUp);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer timer;
     }
 }
 
