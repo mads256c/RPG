@@ -18,7 +18,7 @@ namespace RPG.Objects
             BackColor = Color.White;
         }
 
-        public Wall(int x1, int y1, int x2, int y2) : this(new Point(x1, y1), new Size(x2, y2)) { }
+        public Wall(int x1, int y1, int x2, int y2) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1)) { }
 
     }
 
