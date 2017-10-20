@@ -128,7 +128,7 @@ namespace RPG.Potions
                 case PotionSize.Small:
                     return "Heler en lille del af dit liv.";
                 case PotionSize.Medium:
-                    return "Heler en halvdelen af dit liv.";
+                    return "Heler halvdelen af dit liv.";
                 case PotionSize.Big:
                     return "Heler en stor del af dit liv.";
                 case PotionSize.Max:
@@ -212,16 +212,14 @@ namespace RPG.Potions
 
         public static Potion GeneratePotion()
         {
-            List<string> typeList = InheritedClassEnumerator.GetListOfInheritedClasses<Potion>();
-
-            return (Potion) Activator.CreateInstance(Type.GetType(typeList[RandomGenerator.Random.Next(typeList.Count)]) ?? throw new ArgumentNullException());
+            return GeneratePotion((PotionSize)RandomGenerator.Random.Next(4));
         }
 
         public static Potion GeneratePotion(PotionSize potionSize)
         {
-            List<string> typeList = InheritedClassEnumerator.GetListOfInheritedClasses<Potion>();
+            List<Type> typeList = InheritedClassEnumerator.GetListOfTypes<Potion>();
 
-            return (Potion)Activator.CreateInstance(Type.GetType(typeList[RandomGenerator.Random.Next(typeList.Count)]) ?? throw new ArgumentNullException(), potionSize);
+            return (Potion)Activator.CreateInstance(typeList[RandomGenerator.Random.Next(typeList.Count)] ?? throw new ArgumentNullException(), potionSize);
         }
 
     }

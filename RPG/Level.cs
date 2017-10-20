@@ -33,7 +33,7 @@ namespace RPG
                     goto end;
                 }
 
-                foreach (var levelObject in InheritedClassEnumerator.GetListOfInheritedClasses<LevelObject>())
+                foreach (var levelObject in InheritedClassEnumerator.GetListOfStrings<LevelObject>())
                 {
                     if (line == levelObject)
                     {
@@ -52,7 +52,7 @@ namespace RPG
                     FormOverworld.OverworldPlayer.BringToFront();
                 }
 
-                foreach (var levelObject in InheritedClassEnumerator.GetListOfInheritedClasses<LevelObject>())
+                foreach (var levelObject in InheritedClassEnumerator.GetListOfStrings<LevelObject>())
                 {
                     if (levelObject == loadID)
                     {

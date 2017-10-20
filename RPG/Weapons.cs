@@ -110,12 +110,11 @@ namespace RPG.Weapons
         //TODO remake this. This is just stupid and sloppy code.
         public static Weapon GenerateWeapon()
         {
-            var temp = InheritedClassEnumerator.GetListOfInheritedClasses<Weapon>();
-            Weapon tempweapon = (Weapon) Activator.CreateInstance(Type.GetType(temp[RandomGenerator.Random.Next(temp.Count)]) ??
+            var temp = InheritedClassEnumerator.GetListOfTypes<Weapon>();
+            Weapon tempweapon = (Weapon) Activator.CreateInstance(temp[RandomGenerator.Random.Next(temp.Count)] ??
                                               throw new ArgumentNullException(), "", 0);
             int damage = RandomGenerator.Random.Next(11);
-            return (Weapon)Activator.CreateInstance(Type.GetType(temp[RandomGenerator.Random.Next(temp.Count)]) ??
-                                                    throw new ArgumentNullException(), NameGeneration.WeaponName(tempweapon, damage), damage);
+            return (Weapon)Activator.CreateInstance(tempweapon.GetType(), NameGeneration.WeaponName(tempweapon, damage), damage);
         }
     }
 }

@@ -47,10 +47,10 @@ namespace RPG.Extensions
         }
     }
 
-    //Kraftigt ændret af mig. Den returnere ikke længere end klasse. Nu returnerer den en liste af strenge, hvor alle nedavede klassers navner ligger i.
+    //Kraftigt ændret af mig. Den returnere ikke længere en klasse. Nu returnerer den en liste af strenge, hvor alle nedavede klassers navner ligger i.
     public static class InheritedClassEnumerator
     {
-        public static List<string> GetListOfInheritedClasses<T>() where T : class
+        public static List<string> GetListOfStrings<T>() where T : class
         {
             var objects = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
@@ -58,6 +58,15 @@ namespace RPG.Extensions
                 .Select(type => type.FullName)
                 .ToList();
             objects.Sort();
+            return objects;
+        }
+
+        public static List<Type> GetListOfTypes<T>() where T : class
+        {
+            var objects = Assembly.GetAssembly(typeof(T))
+                .GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T)))
+                .ToList();
             return objects;
         }
     }

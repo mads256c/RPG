@@ -13,29 +13,27 @@ namespace RPG.Objects
 {
     public sealed class Wall : LevelObject
     {
-        public new static List<Wall> Objects = new List<Wall>();
-
-        public Wall(int x1, int y1, int x2, int y2) : base(x1, y1, x2, y2)
+        public Wall(Point location, Size size) : base(location, size)
         {
             BackColor = Color.White;
-            Objects.Add(this);
         }
+
+        public Wall(int x1, int y1, int x2, int y2) : this(new Point(x1, y1), new Size(x2, y2)) { }
 
     }
 
     public sealed class Grass : LevelObject
     {
-        public new static List<Grass> Objects = new List<Grass>();
-
         public int EncounterRate;
 
-        public Grass(int x1, int y1, int x2, int y2, int encounterRate) : base(x1, y1, x2, y2)
+        public Grass(Point location, Size size, int encounterRate) : base(location, size)
         {
             BackColor = Color.DarkGreen;
             this.SetImage(Resources.Grass);
             EncounterRate = encounterRate;
-            Objects.Add(this);
         }
+
+        public Grass(int x1, int y1, int x2, int y2, int encounterRate) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), encounterRate) { }
 
         public override bool IntersectsCollider(Rectangle bounds)
         {
@@ -65,11 +63,13 @@ namespace RPG.Objects
 
         public int LevelID;
 
-        public Entrance(int x1, int y1, int x2, int y2, int levelID) : base(x1, y1, x2, y2)
+        public Entrance(Point location, Size size, int levelID) : base(location, size)
         {
             LevelID = levelID;
             Objects.Add(this);
         }
+
+        public Entrance(int x1, int y1, int x2, int y2, int levelID) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), levelID) { }
 
         public override bool IntersectsCollider(Rectangle bounds)
         {
@@ -107,12 +107,14 @@ namespace RPG.Objects
 
         private bool _open;
 
-        public Door(int x1, int y1, int x2, int y2, int id) : base(x1, y1, x2, y2)
+        public Door(Point location, Size size, int id) : base(location, size)
         {
             ID = id;
             BackColor = Color.SaddleBrown;
             Objects.Add(this);
         }
+
+        public Door(int x1, int y1, int x2, int y2, int id) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), id) { }
 
         public override bool IntersectsCollider(Rectangle bounds)
         {
@@ -131,13 +133,15 @@ namespace RPG.Objects
 
         public int ID;
 
-        public Key(int x1, int y1, int x2, int y2, int id) : base(x1, y1, x2, y2)
+        public Key(Point location, Size size, int id) : base(location, size)
         {
             ID = id;
             BackColor = Color.Transparent;
             Image = Resources.Key;
             Objects.Add(this);
         }
+
+        public Key(int x1, int y1, int x2, int y2, int id) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), id) { }
 
         public override bool IntersectsCollider(Rectangle bounds)
         {
@@ -167,20 +171,18 @@ namespace RPG.Objects
     {
         private static readonly Image Dirt = Resources.Dirt;
         private static readonly Image Tiles = Resources.Tiles;
-        private enum FloorTexture
+        public enum FloorTexture
         {
             Dirt = 0,
             Tiles = 1
         }
 
-        public new static List<Floor> Objects = new List<Floor>();
-
         private readonly FloorTexture _floorTexture;
 
-        public Floor(int x1, int y1, int x2, int y2, int floor) : base(x1, y1, x2, y2)
+        public Floor(Point location, Size size, FloorTexture floorTexture) : base(location, size)
         {
             Image temp;
-            _floorTexture = (FloorTexture)floor;
+            _floorTexture = floorTexture;
             switch (_floorTexture)
             {
                 case FloorTexture.Dirt:
@@ -190,11 +192,12 @@ namespace RPG.Objects
                     temp = Tiles;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(floor), floor, null);
+                    throw new ArgumentOutOfRangeException();
             }
             this.SetImage(temp);
-            Objects.Add(this);
         }
+
+        public Floor(int x1, int y1, int x2, int y2, int floor) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), (FloorTexture)floor) { }
 
         public override bool IntersectsCollider(Rectangle bounds) => false;
 
@@ -206,23 +209,27 @@ namespace RPG.Objects
 
     public sealed class HealthPotionLevelObject : PotionLevelObject
     {
-        public HealthPotionLevelObject(int x, int y, int size) : base(x, y)
+        public HealthPotionLevelObject(Point location, Potion.PotionSize size) : base(location)
         {
-            Potion = new HealthPotion((Potion.PotionSize)size);
+            Potion = new HealthPotion(size);
             Image = Potion.GetImage();
             SizeMode = PictureBoxSizeMode.CenterImage;
         }
+
+        public HealthPotionLevelObject(int x, int y, int size) : this(new Point(x, y), (Potion.PotionSize)size) { }
 
     }
 
     public sealed class ManaPotionLevelObject : PotionLevelObject
     {
-        public ManaPotionLevelObject(int x, int y, int size) : base(x, y)
+        public ManaPotionLevelObject(Point location, Potion.PotionSize size) : base(location)
         {
-            Potion = new ManaPotion((Potion.PotionSize)size);
+            Potion = new ManaPotion(size);
             Image = Potion.GetImage();
             SizeMode = PictureBoxSizeMode.CenterImage;
         }
+
+        public ManaPotionLevelObject(int x, int y, int size) : this(new Point(x, y), (Potion.PotionSize)size) { }
     }
 
     //Gør klassen abstrakt så det ikke er muligt at lave en instans af klassen.
@@ -230,10 +237,7 @@ namespace RPG.Objects
     {
         public Potion Potion;
 
-        protected PotionLevelObject(int x, int y) : base (x, y, x + 32, y + 32)
-        {
-
-        }
+        protected PotionLevelObject(Point location) : base (location, new Size(32, 32)) { }
 
         public override string GetDebugInfo()
         {
@@ -255,7 +259,7 @@ namespace RPG.Objects
     {
         public Weapon Weapon;
 
-        public WeaponChest(int x, int y) : base(x, y)
+        public WeaponChest(int x, int y) : base(new Point(x, y))
         {
             Image = Resources.WeaponChest;
             Weapon = Weapon.GenerateWeapon();
@@ -279,17 +283,24 @@ namespace RPG.Objects
                 ChestUi = null;
             }
         }
+
+        protected override void UseContents()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public sealed class PotionChest : Chest
     {
         public Potion Potion;
 
-        public PotionChest(int x, int y) : base(x, y)
+        public PotionChest(Point location) : base(location)
         {
             Image = Resources.PotionChest;
             Potion = Potion.GeneratePotion();
         }
+
+        public PotionChest(int x, int y) : this(new Point(x, y)) { }
 
         public override void IntersectsPlayer(Rectangle bounds)
         {
@@ -310,6 +321,11 @@ namespace RPG.Objects
                 ChestUi = null;
             }
         }
+
+        protected override void UseContents()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public abstract class Chest : LevelObject
@@ -317,10 +333,20 @@ namespace RPG.Objects
         protected ChestUi ChestUi;
 
         protected Rectangle TriggerBounds;
-        protected Chest(int x, int y) : base(x, y, x + 32, y + 32)
+
+        protected Chest(Point location) : base(location, new Size(32, 32))
         {
-            TriggerBounds = new Rectangle(x - 48, y - 48, 96, 96);
+            TriggerBounds = new Rectangle(new Point(location.X - 48, location.Y - 48), new Size(96, 96));
+            Input.Instance.SpacePressed += SpacePressed;
         }
+
+        private void SpacePressed()
+        {
+            if (TriggerBounds.IntersectsWith(FormOverworld.OverworldPlayer.Bounds))
+            UseContents();
+        }
+
+        protected abstract void UseContents();
 
     }
 
@@ -330,10 +356,10 @@ namespace RPG.Objects
     {
         public static List<LevelObject> Objects = new List<LevelObject>();
 
-        protected LevelObject(int x1, int y1, int x2, int y2)
+        protected LevelObject(Point location, Size size)
         {
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
+            Location = location;
+            Size = size;
             Objects.Add(this);
         }
 
@@ -342,10 +368,7 @@ namespace RPG.Objects
             return Bounds.IntersectsWith(bounds);
         }
 
-        public virtual void IntersectsPlayer(Rectangle bounds)
-        {
-
-        }
+        public virtual void IntersectsPlayer(Rectangle bounds) { }
 
         public virtual string GetDebugInfo()
         {

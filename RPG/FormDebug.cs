@@ -13,7 +13,7 @@ namespace RPG
         {
             InitializeComponent();
             treeViewObjects.Nodes.Clear();
-            foreach (var obj in InheritedClassEnumerator.GetListOfInheritedClasses<LevelObject>())
+            foreach (var obj in InheritedClassEnumerator.GetListOfStrings<LevelObject>())
             {
                 treeViewObjects.Nodes.Add(obj);
             }

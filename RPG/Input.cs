@@ -25,11 +25,18 @@ namespace RPG
 
         private Direction _direction;
 
+        private bool _spacePressed = false;
+
         private readonly Timer _timer = new Timer
         {
             Interval = 1,
             Enabled = true
         };
+
+        public delegate void EmptyEventArgs();
+
+        public event EmptyEventArgs SpacePressed;
+
 
         private void Tick(object sender, EventArgs e)
         {
@@ -73,6 +80,11 @@ namespace RPG
                 case Keys.A:
                     _direction |= Direction.Left;
                     break;
+                case Keys.Space:
+                    if (!_spacePressed)
+                        SpacePressed?.Invoke();
+
+                    break;
             }
         }
 
@@ -94,6 +106,10 @@ namespace RPG
 
                 case Keys.A:
                     _direction &= ~Direction.Left;
+                    break;
+
+                case Keys.Space:
+                    _spacePressed = false;
                     break;
             }
         }
