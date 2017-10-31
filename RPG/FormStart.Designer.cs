@@ -32,24 +32,25 @@
             this.labelName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.groupBoxSkills = new System.Windows.Forms.GroupBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.numericUpDownStrength = new System.Windows.Forms.NumericUpDown();
-            this.labelPointsLeft = new System.Windows.Forms.Label();
-            this.labelStrength = new System.Windows.Forms.Label();
-            this.labelWisdom = new System.Windows.Forms.Label();
-            this.numericUpDownWisdom = new System.Windows.Forms.NumericUpDown();
-            this.labelSpeed = new System.Windows.Forms.Label();
-            this.numericUpDownSpeed = new System.Windows.Forms.NumericUpDown();
             this.labelResistance = new System.Windows.Forms.Label();
             this.numericUpDownResistance = new System.Windows.Forms.NumericUpDown();
             this.labelDefence = new System.Windows.Forms.Label();
             this.numericUpDownDefence = new System.Windows.Forms.NumericUpDown();
+            this.labelSpeed = new System.Windows.Forms.Label();
+            this.numericUpDownSpeed = new System.Windows.Forms.NumericUpDown();
+            this.labelWisdom = new System.Windows.Forms.Label();
+            this.numericUpDownWisdom = new System.Windows.Forms.NumericUpDown();
+            this.labelStrength = new System.Windows.Forms.Label();
+            this.labelPointsLeft = new System.Windows.Forms.Label();
+            this.numericUpDownStrength = new System.Windows.Forms.NumericUpDown();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.buttonRandom = new System.Windows.Forms.Button();
             this.groupBoxSkills.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStrength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWisdom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownResistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDefence)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWisdom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStrength)).BeginInit();
             this.SuspendLayout();
             // 
             // labelRPG
@@ -75,7 +76,7 @@
             // 
             this.textBoxName.Location = new System.Drawing.Point(12, 64);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(260, 20);
+            this.textBoxName.Size = new System.Drawing.Size(179, 20);
             this.textBoxName.TabIndex = 2;
             // 
             // groupBoxSkills
@@ -97,106 +98,6 @@
             this.groupBoxSkills.TabIndex = 3;
             this.groupBoxSkills.TabStop = false;
             this.groupBoxSkills.Text = "Færdigheder";
-            // 
-            // buttonOK
-            // 
-            this.buttonOK.Location = new System.Drawing.Point(197, 228);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 4;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
-            // 
-            // numericUpDownStrength
-            // 
-            this.numericUpDownStrength.Location = new System.Drawing.Point(22, 55);
-            this.numericUpDownStrength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownStrength.Name = "numericUpDownStrength";
-            this.numericUpDownStrength.Size = new System.Drawing.Size(68, 20);
-            this.numericUpDownStrength.TabIndex = 0;
-            this.numericUpDownStrength.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownStrength.ValueChanged += new System.EventHandler(this.NumericUpDownStrength_ValueChanged);
-            // 
-            // labelPointsLeft
-            // 
-            this.labelPointsLeft.AutoSize = true;
-            this.labelPointsLeft.Location = new System.Drawing.Point(89, 16);
-            this.labelPointsLeft.Name = "labelPointsLeft";
-            this.labelPointsLeft.Size = new System.Drawing.Size(83, 13);
-            this.labelPointsLeft.TabIndex = 1;
-            this.labelPointsLeft.Text = "Point tilbage: 20";
-            // 
-            // labelStrength
-            // 
-            this.labelStrength.AutoSize = true;
-            this.labelStrength.Location = new System.Drawing.Point(23, 36);
-            this.labelStrength.Name = "labelStrength";
-            this.labelStrength.Size = new System.Drawing.Size(40, 13);
-            this.labelStrength.TabIndex = 2;
-            this.labelStrength.Text = "Styrke:";
-            // 
-            // labelWisdom
-            // 
-            this.labelWisdom.AutoSize = true;
-            this.labelWisdom.Location = new System.Drawing.Point(97, 36);
-            this.labelWisdom.Name = "labelWisdom";
-            this.labelWisdom.Size = new System.Drawing.Size(44, 13);
-            this.labelWisdom.TabIndex = 4;
-            this.labelWisdom.Text = "Visdom:";
-            // 
-            // numericUpDownWisdom
-            // 
-            this.numericUpDownWisdom.Location = new System.Drawing.Point(96, 55);
-            this.numericUpDownWisdom.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownWisdom.Name = "numericUpDownWisdom";
-            this.numericUpDownWisdom.Size = new System.Drawing.Size(68, 20);
-            this.numericUpDownWisdom.TabIndex = 3;
-            this.numericUpDownWisdom.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownWisdom.ValueChanged += new System.EventHandler(this.NumericUpDownWisdom_ValueChanged);
-            // 
-            // labelSpeed
-            // 
-            this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(171, 36);
-            this.labelSpeed.Name = "labelSpeed";
-            this.labelSpeed.Size = new System.Drawing.Size(58, 13);
-            this.labelSpeed.TabIndex = 6;
-            this.labelSpeed.Text = "Hastighed:";
-            // 
-            // numericUpDownSpeed
-            // 
-            this.numericUpDownSpeed.Location = new System.Drawing.Point(170, 55);
-            this.numericUpDownSpeed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownSpeed.Name = "numericUpDownSpeed";
-            this.numericUpDownSpeed.Size = new System.Drawing.Size(68, 20);
-            this.numericUpDownSpeed.TabIndex = 5;
-            this.numericUpDownSpeed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownSpeed.ValueChanged += new System.EventHandler(this.NumericUpDownSpeed_ValueChanged);
             // 
             // labelResistance
             // 
@@ -252,11 +153,122 @@
             0});
             this.numericUpDownDefence.ValueChanged += new System.EventHandler(this.NumericUpDownDefence_ValueChanged);
             // 
+            // labelSpeed
+            // 
+            this.labelSpeed.AutoSize = true;
+            this.labelSpeed.Location = new System.Drawing.Point(171, 36);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(58, 13);
+            this.labelSpeed.TabIndex = 6;
+            this.labelSpeed.Text = "Hastighed:";
+            // 
+            // numericUpDownSpeed
+            // 
+            this.numericUpDownSpeed.Location = new System.Drawing.Point(170, 55);
+            this.numericUpDownSpeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownSpeed.Name = "numericUpDownSpeed";
+            this.numericUpDownSpeed.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownSpeed.TabIndex = 5;
+            this.numericUpDownSpeed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownSpeed.ValueChanged += new System.EventHandler(this.NumericUpDownSpeed_ValueChanged);
+            // 
+            // labelWisdom
+            // 
+            this.labelWisdom.AutoSize = true;
+            this.labelWisdom.Location = new System.Drawing.Point(97, 36);
+            this.labelWisdom.Name = "labelWisdom";
+            this.labelWisdom.Size = new System.Drawing.Size(44, 13);
+            this.labelWisdom.TabIndex = 4;
+            this.labelWisdom.Text = "Visdom:";
+            // 
+            // numericUpDownWisdom
+            // 
+            this.numericUpDownWisdom.Location = new System.Drawing.Point(96, 55);
+            this.numericUpDownWisdom.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownWisdom.Name = "numericUpDownWisdom";
+            this.numericUpDownWisdom.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownWisdom.TabIndex = 3;
+            this.numericUpDownWisdom.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownWisdom.ValueChanged += new System.EventHandler(this.NumericUpDownWisdom_ValueChanged);
+            // 
+            // labelStrength
+            // 
+            this.labelStrength.AutoSize = true;
+            this.labelStrength.Location = new System.Drawing.Point(23, 36);
+            this.labelStrength.Name = "labelStrength";
+            this.labelStrength.Size = new System.Drawing.Size(40, 13);
+            this.labelStrength.TabIndex = 2;
+            this.labelStrength.Text = "Styrke:";
+            // 
+            // labelPointsLeft
+            // 
+            this.labelPointsLeft.AutoSize = true;
+            this.labelPointsLeft.Location = new System.Drawing.Point(89, 16);
+            this.labelPointsLeft.Name = "labelPointsLeft";
+            this.labelPointsLeft.Size = new System.Drawing.Size(83, 13);
+            this.labelPointsLeft.TabIndex = 1;
+            this.labelPointsLeft.Text = "Point tilbage: 20";
+            // 
+            // numericUpDownStrength
+            // 
+            this.numericUpDownStrength.Location = new System.Drawing.Point(22, 55);
+            this.numericUpDownStrength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownStrength.Name = "numericUpDownStrength";
+            this.numericUpDownStrength.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownStrength.TabIndex = 0;
+            this.numericUpDownStrength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownStrength.ValueChanged += new System.EventHandler(this.NumericUpDownStrength_ValueChanged);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Location = new System.Drawing.Point(197, 228);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 4;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
+            // 
+            // buttonRandom
+            // 
+            this.buttonRandom.Location = new System.Drawing.Point(197, 63);
+            this.buttonRandom.Name = "buttonRandom";
+            this.buttonRandom.Size = new System.Drawing.Size(75, 23);
+            this.buttonRandom.TabIndex = 5;
+            this.buttonRandom.Text = "Tilfældig";
+            this.buttonRandom.UseVisualStyleBackColor = true;
+            this.buttonRandom.Click += new System.EventHandler(this.buttonRandom_Click);
+            // 
             // FormStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.buttonRandom);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBoxSkills);
             this.Controls.Add(this.textBoxName);
@@ -266,11 +278,11 @@
             this.Text = "FormStats";
             this.groupBoxSkills.ResumeLayout(false);
             this.groupBoxSkills.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStrength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWisdom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownResistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDefence)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWisdom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStrength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,5 +306,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDownResistance;
         private System.Windows.Forms.Label labelDefence;
         private System.Windows.Forms.NumericUpDown numericUpDownDefence;
+        private System.Windows.Forms.Button buttonRandom;
     }
 }

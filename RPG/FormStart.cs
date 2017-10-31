@@ -102,5 +102,10 @@ namespace RPG
             Close();
 
         }
+
+        private void buttonRandom_Click(object sender, EventArgs e)
+        {
+            textBoxName.Text = NameGeneration.PlayerName();
+        }
     }
 }

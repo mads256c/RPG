@@ -14,7 +14,7 @@ namespace RPG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormOverworld());
+            Application.Run(new FormStart());
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using RPG.Extensions;
 using RPG.Properties;
@@ -45,8 +42,9 @@ namespace RPG.UI
                 Text = chestUiInfo.Title,
                 BackColor = Color.Black,
                 ForeColor = Color.White,
-                Location = new Point(MathExtension.Clamp(chestUiInfo.Location.X, 0, FormOverworld.Instance.ClientSize.Width), MathExtension.Clamp(chestUiInfo.Location.Y, 0, FormOverworld.Instance.ClientSize.Height)),
-                Size = new Size(300, 100)
+                Size = new Size(300, 100),
+                Location = new Point(MathExtension.Clamp(chestUiInfo.Location.X, 0, FormOverworld.Instance.ClientSize.Width - 300),
+                MathExtension.Clamp(chestUiInfo.Location.Y, 0, FormOverworld.Instance.ClientSize.Height - 100))
             };
 
             ItemBox = new PictureBox

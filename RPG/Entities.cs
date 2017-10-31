@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using RPG.Objects;
 using RPG.Properties;
+using RPG.Weapons;
 
 namespace RPG
 {
@@ -33,6 +34,8 @@ namespace RPG
 
         public static int Defence = 1;
         public static int Resistance = 1;
+
+        public static Weapon Weapon = null;
     }
 
 

@@ -47,7 +47,7 @@ namespace RPG.Extensions
         }
     }
 
-    //Kraftigt ændret af mig. Den returnere ikke længere en klasse. Nu returnerer den en liste af strenge, hvor alle nedavede klassers navner ligger i.
+    //Kraftigt ændret af mig. Den returnerer ikke længere en klasse. Nu returnerer den en liste af strenge, hvor alle nedavede klassers navner ligger i.
     public static class InheritedClassEnumerator
     {
         public static List<string> GetListOfStrings<T>() where T : class
@@ -86,5 +86,16 @@ namespace RPG.Extensions
             return Math.Max(min, Math.Min(value, max));
         }
     }
+
+    public static class VariableHelper
+    {
+        public static void Swap<T>(ref T x, ref T y)
+        {
+            T t = y;
+            y = x;
+            x = t;
+        }
+    }
+
 
 }

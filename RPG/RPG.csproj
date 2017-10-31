@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
     <Compile Include="Entities.cs" />
     <Compile Include="FormBattle.cs">
       <SubType>Form</SubType>
@@ -156,6 +157,7 @@
     <Content Include="Resources\MaxMana.png" />
     <Content Include="Resources\MediumHealth.png" />
     <Content Include="Resources\MediumMana.png" />
+    <Content Include="Resources\Orc.png" />
     <Content Include="Resources\PotionChest.png" />
     <Content Include="Resources\SmallHealth.png" />
     <Content Include="Resources\SmallMana.png" />

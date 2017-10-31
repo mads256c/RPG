@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using RPGEditor;
 
-namespace RPGEditor
+namespace RPG.Objects
 {
     public enum ObjectType
     {
@@ -16,11 +17,13 @@ namespace RPGEditor
         Floor
     }
 
-    public class Player : PictureBox
+    public class Player : EditorObjectHelper
     {
         public static Player player = null;
 
         public new static ContextMenu ContextMenu;
+
+        public Player() : this(0, 0) { }
 
         public Player(int x, int y) : base()
         {
@@ -46,8 +49,9 @@ namespace RPGEditor
             }
         }
 
-        public virtual void RemoveObject()
+        public override void RemoveObject()
         {
+            base.RemoveObject();
             player = null;
         }
 
@@ -98,25 +102,21 @@ namespace RPGEditor
 
     public class Wall : EditorObject
     {
-        public static List<Wall> Walls = new List<Wall>();
+
+        public Wall() : this(0, 0, 128, 128) { }
 
         public Wall(int x1, int y1, int x2, int y2)
         {
             BackColor = Color.White;
             Location = new Point(x1, y1);
             Size = new Size(x2 - x1, y2 - y1);
-            Walls.Add(this);
         }
 
-        public override void RemoveObject()
-        {
-            Walls.Remove(this);
-        }
     }
 
     public class Grass : EditorObject
     {
-        public static List<Grass> Grasses = new List<Grass>();
+        public Grass() : this(0, 0, 128, 128, 0) { }
 
         public Grass(int x1, int y1, int x2, int y2, int encounterRate)
         {
@@ -124,7 +124,6 @@ namespace RPGEditor
             Size = new Size(x2 - x1, y2 - y1);
             EncounterRate = encounterRate;
             BackColor = Color.DarkGreen;
-            Grasses.Add(this);
         }
 
         public int EncounterRate = 0;
@@ -144,15 +143,17 @@ namespace RPGEditor
             }
         }
 
-        public override void RemoveObject()
+        public override string GetFileFormat()
         {
-            Grasses.Remove(this);
+            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{EncounterRate}";
         }
+
     }
 
     public class Entrance : EditorObject
     {
-        public static List<Entrance> Entrances = new List<Entrance>();
+
+        public Entrance() : this(0, 0, 128, 128, 0) { }
 
         public Entrance(int x1, int y1, int x2, int y2, int id)
         {
@@ -160,7 +161,6 @@ namespace RPGEditor
             Size = new Size(x2 - x1, y2 - y1);
             LevelID = id;
             BackColor = Color.Aqua;
-            Entrances.Add(this);
         }
 
         public int LevelID = 0;
@@ -180,17 +180,17 @@ namespace RPGEditor
             }
         }
 
-        public override void RemoveObject()
+        public override string GetFileFormat()
         {
-            Entrances.Remove(this);
+            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{LevelID}";
         }
     }
 
     public class Door : EditorObject
     {
-        public static List<Door> Doors = new List<Door>();
-
         public int ID = 0;
+
+        public Door() : this(0, 0, 128, 128, 0) { }
 
         public Door(int x1, int y1, int x2, int y2, int id)
         {
@@ -198,7 +198,6 @@ namespace RPGEditor
             Size = new Size(x2 - x1, y2 - y1);
             ID = id;
             BackColor = Color.SaddleBrown;
-            Doors.Add(this);
         }
 
         public override void EditObject()
@@ -216,17 +215,18 @@ namespace RPGEditor
             }
         }
 
-        public override void RemoveObject()
+        public override string GetFileFormat()
         {
-            Doors.Remove(this);
+            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{ID}";
         }
     }
 
     public class Key : EditorObject
     {
-        public static List<Key> Keys = new List<Key>();
 
         public int ID = 0;
+
+        public Key() : this(0, 0, 128, 128, 0) { }
 
         public Key(int x1, int y1, int x2, int y2, int id)
         {
@@ -234,7 +234,6 @@ namespace RPGEditor
             Size = new Size(x2 - x1, y2 - y1);
             ID = id;
             BackColor = Color.Goldenrod;
-            Keys.Add(this);
         }
 
         public override void EditObject()
@@ -252,17 +251,18 @@ namespace RPGEditor
             }
         }
 
-        public override void RemoveObject()
+        public override string GetFileFormat()
         {
-            Keys.Remove(this);
+            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{ID}";
         }
     }
 
     public class Floor : EditorObject
     {
-        public static List<Floor> Floors = new List<Floor>();
 
         public int TextureID = 0;
+
+        public Floor() : this(0, 0, 128, 128, 0) { }
 
         public Floor(int x1, int y1, int x2, int y2, int textureID)
         {
@@ -270,7 +270,6 @@ namespace RPGEditor
             Size = new Size(x2 - x1, y2 - y1);
             TextureID = textureID;
             BackColor = Color.Brown;
-            Floors.Add(this);
         }
 
         public override void EditObject()
@@ -288,18 +287,18 @@ namespace RPGEditor
             }
         }
 
-        public override void RemoveObject()
+        public override string GetFileFormat()
         {
-            Floors.Remove(this);
+            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{TextureID}";
         }
     }
 
     //Fra stackoverflow. Lavet meget om af mig.
-    public class EditorObject : SizeablePictureBox
+    public abstract class EditorObject : SizeablePictureBox
     {
         public new static ContextMenu ContextMenu;
 
-        public EditorObject() : base()
+        protected EditorObject() : base()
         {
             MouseDown += EditorObject_MouseDown;
             MouseMove += EditorObject_MouseMove;
@@ -318,11 +317,6 @@ namespace RPGEditor
                     Size = new Size(info.x2 - info.x1, info.y2 - info.y1);
                 }
             }
-        }
-
-        public virtual void RemoveObject()
-        {
-
         }
 
         void EditorObject_EditClick(object sender, EventArgs e)
@@ -371,7 +365,7 @@ namespace RPGEditor
     }
 
     //Fra stackoverflow
-    public class SizeablePictureBox : PictureBox
+    public abstract class SizeablePictureBox : EditorObjectHelper
     {
         public SizeablePictureBox()
         {
@@ -388,11 +382,32 @@ namespace RPGEditor
             base.WndProc(ref m);
             if (m.Msg == 0x84)
             {  // Trap WM_NCHITTEST
-                var pos = this.PointToClient(new Point(m.LParam.ToInt32()));
-                if (pos.X >= this.ClientSize.Width - grab && pos.Y >= this.ClientSize.Height - grab)
+                var pos = PointToClient(new Point(m.LParam.ToInt32()));
+                if (pos.X >= ClientSize.Width - grab && pos.Y >= this.ClientSize.Height - grab)
                     m.Result = new IntPtr(17);  // HT_BOTTOMRIGHT
             }
         }
         private const int grab = 16;
+    }
+
+    public abstract class EditorObjectHelper : PictureBox
+    {
+        public static List<EditorObjectHelper> EditorObjectHelpers = new List<EditorObjectHelper>();
+
+        protected EditorObjectHelper()
+        {
+            EditorObjectHelpers.Add(this);
+        }
+
+        public virtual string GetFileFormat()
+        {
+            return $"{Location.X},{Location.Y}";
+        }
+
+        public virtual void RemoveObject()
+        {
+            EditorObjectHelpers.Remove(this);
+            FormEditor.Instance.Controls.Remove(this);
+        }
     }
 }

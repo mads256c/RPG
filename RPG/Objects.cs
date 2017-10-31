@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using RPG.Extensions;
 using RPG.Potions;
@@ -272,9 +271,20 @@ namespace RPG.Objects
 
                 if (ChestUi == null)
                 {
-                    ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste", Weapon.GetWeaponImage(), Weapon.GetWeaponLongName(), Weapon.GetWeaponDescription(),
-                        "Tryk mellemrum for at bytte våben." );
-                    ChestUi = new ChestUi(chestUiInfo);
+                    if (Weapon == null)
+                    {
+                        ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste",
+                            null, "Tom", "Kisten er tom",
+                            "");
+                        ChestUi = new ChestUi(chestUiInfo);
+                    }
+                    else
+                    {
+                        ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste",
+                            Weapon.GetWeaponImage(), Weapon.GetWeaponLongName(), Weapon.GetWeaponDescription(),
+                            "Tryk mellemrum for at bytte våben.");
+                        ChestUi = new ChestUi(chestUiInfo);
+                    }
                 }
             }
             else
@@ -286,7 +296,10 @@ namespace RPG.Objects
 
         protected override void UseContents()
         {
-            throw new NotImplementedException();
+            VariableHelper.Swap(ref Weapon, ref Player.Weapon);
+            ChestUi.Dispose();
+            ChestUi = null;
+            IntersectsPlayer(FormOverworld.OverworldPlayer.Bounds);
         }
     }
 
@@ -309,9 +322,21 @@ namespace RPG.Objects
 
                 if (ChestUi == null)
                 {
-                    ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Elexirkiste", Potion.GetImage(),
-                        Potion.GetLongName(), Potion.GetDescription(),
-                        "Tryk mellemrum for at drikke elexiren.");
+                    ChestUi.ChestUiInfo chestUiInfo;
+                    if (Potion != null)
+                    {
+                        chestUiInfo = new ChestUi.ChestUiInfo(Location, "Elexirkiste",
+                            Potion.GetImage(),
+                            Potion.GetLongName(), Potion.GetDescription(),
+                            "Tryk mellemrum for at drikke elexiren.");
+                    }
+                    else
+                    {
+                        chestUiInfo = new ChestUi.ChestUiInfo(Location, "Elexirkiste",
+                            null,
+                            "Tom", "Kisten er tom",
+                            "");
+                    }
                     ChestUi = new ChestUi(chestUiInfo);
                 }
             }
@@ -324,7 +349,14 @@ namespace RPG.Objects
 
         protected override void UseContents()
         {
-            throw new NotImplementedException();
+            if (Potion != null)
+            {
+                Potion.ApplyEffect();
+                Potion = null;
+                ChestUi.Dispose();
+                ChestUi = null;
+                IntersectsPlayer(FormOverworld.OverworldPlayer.Bounds);
+            }
         }
     }
 
@@ -348,6 +380,19 @@ namespace RPG.Objects
 
         protected abstract void UseContents();
 
+    }
+
+    public class EnemyLevelObject : LevelObject
+    {
+        public Enemy Enemy;
+
+        protected EnemyLevelObject(Point location, int health, int mana, int speed, int spriteIndex) : base(location, new Size(32, 32))
+        {
+            Image = Enemy.Sprites[spriteIndex];
+            Enemy = new Enemy(health, mana, speed, "Ork", Image);
+        }
+
+        protected EnemyLevelObject(int x, int y, int health, int mana, int speed, int spriteIndex) : this(new Point(x, y), health, mana, speed, spriteIndex) { }
     }
 
     //TODO lav et bedre drawing system

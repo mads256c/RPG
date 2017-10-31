@@ -13,5 +13,6 @@ RPG.Objects.Door
 100,110,135,191,0
 RPG.Objects.Key
 0,300,60,373,0
-RPG.Objects.PotionChest
+RPG.Objects.WeaponChest
 100,0
+200,0
