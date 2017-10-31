@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using RPG.Extensions;
 using RPG.Objects;
-using RPG.Weapons;
 
 namespace RPG
 {

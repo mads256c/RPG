@@ -7,21 +7,43 @@ using RPG.Weapons;
 
 namespace RPG
 {
+    /// <summary>
+    /// Holder information af spilleren.
+    /// </summary>
     public static class Player
     {
         public static string Name;
 
+        /// <summary>
+        /// Spillerens livspoint. Sørger også få at spilleren ikke kan have flere livspoint end det maximale antal livspoint.
+        /// </summary>
         public static int Health
         {
             get => _health;
 
             set => _health = value > MaxHealth ? MaxHealth : value;
         }
-        private static int _health;
+        private static int _health = MaxHealth;
 
+        /// <summary>
+        /// Udregner spillerens maximale livspoint.
+        /// </summary>
         public static int MaxHealth => Level * 15 + Defence * 5;
 
-        public static int Mana = MaxMana;
+        /// <summary>
+        /// Spillerens mana. Sørger også få at spilleren ikke kan have mere mana end det maximale mana.
+        /// </summary>
+        public static int Mana
+        {
+            get => _mana;
+
+            set => _mana = value > MaxMana ? MaxMana : value;
+        }
+        private static int _mana = MaxMana;
+        
+        /// <summary>
+        /// Udregner spillerens maximale mana.
+        /// </summary>
         public static int MaxMana => Wisdom * 10;
 
         public static int Level = 1;
@@ -38,12 +60,20 @@ namespace RPG
         public static Weapon Weapon = null;
     }
 
-
+    /// <inheritdoc />
+    /// <summary>
+    /// Spilleren man kontrollerer i oververdenen.
+    /// </summary>
     public sealed class OverworldPlayer : PictureBox
     {
+        /// <inheritdoc />
+        /// <summary>
+        /// Laver en ny <see cref="T:RPG.OverworldPlayer" />.
+        /// </summary>
+        /// <param name="x">Spillerens lokation på x aksen.</param>
+        /// <param name="y">Spillerens lokation på y aksen.</param>
         public OverworldPlayer(int x, int y)
         {
-
             Size = new Size(32, 64);
             Location = new Point(x, y);
             BackColor = Color.Transparent;
@@ -51,6 +81,9 @@ namespace RPG
             UpdateCollision();
         }
 
+        /// <summary>
+        /// Flytter spilleren op. Tjekker også efter kollisioner.
+        /// </summary>
         public void MoveUp()
         {
             UpdatePlayer();
@@ -63,6 +96,9 @@ namespace RPG
 
         }
 
+        /// <summary>
+        /// Flytter spilleren ned. Tjekker også efter kollisioner.
+        /// </summary>
         public void MoveDown()
         {
             UpdatePlayer();
@@ -74,6 +110,9 @@ namespace RPG
             UpdateCollision();
         }
 
+        /// <summary>
+        /// Flytter spilleren til højre. Tjekker også efter kollisioner.
+        /// </summary>
         public void MoveRight()
         {
             UpdatePlayer();
@@ -85,6 +124,9 @@ namespace RPG
             UpdateCollision();
         }
 
+        /// <summary>
+        /// Flytter spilleren til venstre. Tjekker også efter kollisioner.
+        /// </summary>
         public void MoveLeft()
         {
             UpdatePlayer();
@@ -96,6 +138,9 @@ namespace RPG
             UpdateCollision();
         }
 
+        /// <summary>
+        /// Opdaterer spillerens kollisionsrektangler.
+        /// </summary>
         public void UpdateCollision()
         {
             _topCollision.Location = new Point(Location.X, Location.Y - 1);
@@ -104,6 +149,9 @@ namespace RPG
             _leftCollision.Location = new Point(Location.X - 1, Location.Y);
         }
 
+        /// <summary>
+        /// Sender kollisionsinformation til aktive <see cref="LevelObject"/> objekter.
+        /// </summary>
         public void UpdatePlayer()
         {
             foreach (var levelObject in LevelObject.Objects)
