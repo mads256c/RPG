@@ -20,19 +20,26 @@ namespace RPG
             Input.Instance = new Input(Instance);
         }
 
-        public static ChestUi ChestUi;
-
+        /// <summary>
+        /// Den eneste instans af <see cref="FormOverworld"/>. Bruges i andre klasser.
+        /// </summary>
         public static FormOverworld Instance;
 
+        /// <summary>
+        /// Den eneste instans af <see cref="OverworldPlayer"/>. Den spiller brugeren kontrollerer i oververdenen.
+        /// </summary>
         public static OverworldPlayer OverworldPlayer;
 
+        /// <summary>
+        /// Til at spille lydeffekter med.
+        /// </summary>
         public static SoundPlayer SoundPlayer = new SoundPlayer();
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-#if DEBUG
-            new FormDebug().Show();
-#endif //DEBUG
+            #if DEBUG
+                new FormDebug().Show();
+            #endif //DEBUG
         }
     }
 }

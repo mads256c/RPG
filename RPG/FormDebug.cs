@@ -6,8 +6,16 @@ using RPG.Objects;
 
 namespace RPG
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// En Debug form der kun kører når programmet debugges.
+    /// </summary>
     public partial class FormDebug : Form
     {
+        /// <inheritdoc />
+        /// <summary>
+        /// Laver en ny <see cref="T:RPG.FormDebug" />.
+        /// </summary>
         public FormDebug()
         {
             InitializeComponent();
@@ -20,11 +28,17 @@ namespace RPG
 
         }
 
+        /// <summary>
+        /// Kører når brugeren klikker på <see cref="buttonLoadLevel"/>.
+        /// </summary>
         private void ButtonLoadLevel_Click(object sender, EventArgs e)
         {
             Level.LoadLevel((int)numericUpDownLoadLevel.Value);
         }
 
+        /// <summary>
+        /// Kører 60 gange i sekundet.
+        /// </summary>
         private void Timer_Tick(object sender, EventArgs e)
         {
             labelPlayerPosition.Text =
