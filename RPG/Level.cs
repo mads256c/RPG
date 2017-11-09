@@ -17,19 +17,19 @@ namespace RPG
             FormOverworld.Instance.Controls.Clear();
         }
 
-        public static void LoadLevel(int levelID)
+        public static void LoadLevel(int levelId)
         {
             ClearLevel();
-            Logger.WriteLine($"Changed level to: {levelID}");
-            FormOverworld.Instance.Text = $"RPG - Level {levelID}";
-            LoadedLevel = levelID;
-            var loadID = "";
+            Logger.WriteLine($"Changed level to: {levelId}");
+            FormOverworld.Instance.Text = $"RPG - Level {levelId}";
+            LoadedLevel = levelId;
+            var loadId = "";
 
-            foreach (var line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelID}.lvl"))
+            foreach (var line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelId}.lvl"))
             {
                 if (line == "Player")
                 {
-                    loadID = "Player";
+                    loadId = "Player";
                     goto end;
                 }
 
@@ -37,14 +37,14 @@ namespace RPG
                 {
                     if (line == levelObject)
                     {
-                        loadID = levelObject;
+                        loadId = levelObject;
                         goto end;
                     }
                 }
 
                 string[] temp = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (loadID == "Player")
+                if (loadId == "Player")
                 {
                     FormOverworld.Instance.Controls.Remove(FormOverworld.OverworldPlayer);
                     FormOverworld.OverworldPlayer = new OverworldPlayer(int.Parse(temp[0]), int.Parse(temp[1]));
@@ -54,7 +54,7 @@ namespace RPG
 
                 foreach (var levelObject in InheritedClassEnumerator.GetListOfStrings<LevelObject>())
                 {
-                    if (levelObject == loadID)
+                    if (levelObject == loadId)
                     {
                         var paramsList = new List<object>();
                         foreach (var param in temp)

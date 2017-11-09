@@ -28,7 +28,7 @@ namespace RPG.Objects
         public Grass(Point location, Size size, int encounterRate) : base(location, size)
         {
             BackColor = Color.DarkGreen;
-            this.SetImage(Resources.Grass);
+            this.SetRepeatingImage(Resources.Grass);
             EncounterRate = encounterRate;
         }
 
@@ -193,7 +193,7 @@ namespace RPG.Objects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            this.SetImage(temp);
+            this.SetRepeatingImage(temp);
         }
 
         public Floor(int x1, int y1, int x2, int y2, int floor) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), (FloorTexture)floor) { }
@@ -297,7 +297,7 @@ namespace RPG.Objects
         protected override void UseContents()
         {
             VariableHelper.Swap(ref Weapon, ref Player.Weapon);
-            ChestUi.Dispose();
+            ChestUi?.Dispose();
             ChestUi = null;
             IntersectsPlayer(FormOverworld.OverworldPlayer.Bounds);
         }

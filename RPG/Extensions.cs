@@ -18,9 +18,9 @@ namespace RPG.Extensions
 
     //Taget fra internettet. Ændret en smugle af mig. I stedet for tal har jeg lavet det om til et enum.
     /// <summary>
-    /// Sætter farven på en <see cref="ProgressBar"/>.
+    /// Denne klasse inderholder forlængelser af klassen <see cref="ProgressBar"/>.
     /// </summary>
-    public static class ProgressBarSetColor
+    public static class ProgressBarExtension
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
         private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr w, IntPtr l);

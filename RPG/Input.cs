@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace RPG
 {
+    /// <summary>
+    /// Denne klasse holder styr på input.
+    /// </summary>
     public class Input
     {
         public Input(FormOverworld form)
@@ -12,8 +15,14 @@ namespace RPG
             _timer.Tick += Tick;
         }
 
+        /// <summary>
+        /// Instansen af <see cref="Input"/>.
+        /// </summary>
         public static Input Instance;
 
+        /// <summary>
+        /// Vejen spilleren går.
+        /// </summary>
         [Flags]
         private enum Direction
         {
@@ -27,6 +36,9 @@ namespace RPG
 
         private bool _spacePressed = false;
 
+        /// <summary>
+        /// Denne timer gør sådan at
+        /// </summary>
         private readonly Timer _timer = new Timer
         {
             Interval = 1,
