@@ -60,21 +60,21 @@ namespace RPG.Objects
     {
         public new static List<Entrance> Objects = new List<Entrance>();
 
-        public int LevelID;
+        public int LevelId;
 
-        public Entrance(Point location, Size size, int levelID) : base(location, size)
+        public Entrance(Point location, Size size, int levelId) : base(location, size)
         {
-            LevelID = levelID;
+            LevelId = levelId;
             Objects.Add(this);
         }
 
-        public Entrance(int x1, int y1, int x2, int y2, int levelID) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), levelID) { }
+        public Entrance(int x1, int y1, int x2, int y2, int levelId) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), levelId) { }
 
         public override bool IntersectsCollider(Rectangle bounds)
         {
             if (Bounds.IntersectsWith(bounds))
             {
-                Level.LoadLevel(LevelID);
+                Level.LoadLevel(LevelId);
                 return true;
             }
             return false;
@@ -83,7 +83,7 @@ namespace RPG.Objects
 
         public override string GetDebugInfo()
         {
-            return base.GetDebugInfo() + $", ID:{LevelID}";
+            return base.GetDebugInfo() + $", ID:{LevelId}";
         }
     }
 
@@ -91,14 +91,14 @@ namespace RPG.Objects
     {
         public new static List<Door> Objects = new List<Door>();
 
-        public int ID;
+        public int Id;
 
         public bool Open
         {
             get => _open;
             set
             {
-                Logger.WriteLine($"Door {ID} open state changed to: {value}");
+                Logger.WriteLine($"Door {Id} open state changed to: {value}");
                 Visible = !value;
                 _open = value;
             }
@@ -108,7 +108,7 @@ namespace RPG.Objects
 
         public Door(Point location, Size size, int id) : base(location, size)
         {
-            ID = id;
+            Id = id;
             BackColor = Color.SaddleBrown;
             Objects.Add(this);
         }
@@ -122,7 +122,7 @@ namespace RPG.Objects
 
         public override string GetDebugInfo()
         {
-            return base.GetDebugInfo() + $", ID:{ID}, O:{Open}";
+            return base.GetDebugInfo() + $", ID:{Id}, O:{Open}";
         }
     }
 
@@ -130,11 +130,11 @@ namespace RPG.Objects
     {
         public new static List<Key> Objects = new List<Key>();
 
-        public int ID;
+        public int Id;
 
         public Key(Point location, Size size, int id) : base(location, size)
         {
-            ID = id;
+            Id = id;
             BackColor = Color.Transparent;
             Image = Resources.Key;
             Objects.Add(this);
@@ -148,7 +148,7 @@ namespace RPG.Objects
             {
                 foreach (var door in Door.Objects)
                 {
-                    if (door.ID == ID)
+                    if (door.Id == Id)
                         door.Open = true;
                 }
                 FormOverworld.SoundPlayer.Stream = Resources.testsound;
@@ -161,7 +161,7 @@ namespace RPG.Objects
 
         public override string GetDebugInfo()
         {
-            return base.GetDebugInfo() + $", ID:{ID}";
+            return base.GetDebugInfo() + $", ID:{Id}";
         }
 
     }
@@ -273,14 +273,14 @@ namespace RPG.Objects
                 {
                     if (Weapon == null)
                     {
-                        ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste",
+                        var chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste",
                             null, "Tom", "Kisten er tom",
                             "");
                         ChestUi = new ChestUi(chestUiInfo);
                     }
                     else
                     {
-                        ChestUi.ChestUiInfo chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste",
+                        var chestUiInfo = new ChestUi.ChestUiInfo(Location, "Våbenkiste",
                             Weapon.GetWeaponImage(), Weapon.GetWeaponLongName(), Weapon.GetWeaponDescription(),
                             "Tryk mellemrum for at bytte våben.");
                         ChestUi = new ChestUi(chestUiInfo);

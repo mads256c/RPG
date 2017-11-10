@@ -1,5 +1,4 @@
 ﻿using RPG.Extensions;
-using RPG.Weapons;
 
 namespace RPG
 {
@@ -41,7 +40,7 @@ namespace RPG
             "Rusten"
         };
 
-        public static string WeaponName(Weapon weapon, int damage)
+        public static string WeaponName(int damage)
         {
             if (damage > 7)
             {

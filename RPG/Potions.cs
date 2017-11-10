@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 using RPG.Extensions;
 using RPG.Properties;
 
@@ -12,31 +8,25 @@ namespace RPG.Potions
 {
     public sealed class ManaPotion : Potion
     {
-        public ManaPotion() : base()
-        {
+        public ManaPotion() { }
 
-        }
-
-        public ManaPotion(PotionSize potionSize) : base(potionSize)
-        {
-
-        }
+        public ManaPotion(PotionSize potionSize) : base(potionSize) { }
 
         public override void ApplyEffect()
         {
             switch (potionSize)
             {
                 case PotionSize.Small:
-                    Player.Mana += (int)(1f / 4f * (float)Player.Mana);
+                    Player.Mana += (int)(1f / 4f * Player.Mana);
                     break;
                 case PotionSize.Medium:
-                    Player.Mana += (int)(2f / 4f * (float)Player.Mana);
+                    Player.Mana += (int)(2f / 4f * Player.Mana);
                     break;
                 case PotionSize.Big:
-                    Player.Mana += (int)(3f / 4f * (float)Player.Mana);
+                    Player.Mana += (int)(3f / 4f * Player.Mana);
                     break;
                 case PotionSize.Max:
-                    Player.Mana += (int)(4f / 4f * (float)Player.Mana);
+                    Player.Mana += (int)(4f / 4f * Player.Mana);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -85,31 +75,25 @@ namespace RPG.Potions
 
     public sealed class HealthPotion : Potion
     {
-        public HealthPotion() : base()
-        {
-            
-        }
+        public HealthPotion() { }
 
-        public HealthPotion(PotionSize potionSize) : base(potionSize)
-        {
-            
-        }
+        public HealthPotion(PotionSize potionSize) : base(potionSize) { }
 
         public override void ApplyEffect()
         {
             switch (potionSize)
             {
                 case PotionSize.Small:
-                    Player.Health += (int)(1f / 4f * (float)Player.MaxHealth);
+                    Player.Health += (int)(1f / 4f * Player.MaxHealth);
                     break;
                 case PotionSize.Medium:
-                    Player.Health += (int)(2f / 4f * (float)Player.MaxHealth);
+                    Player.Health += (int)(2f / 4f * Player.MaxHealth);
                     break;
                 case PotionSize.Big:
-                    Player.Health += (int)(3f / 4f * (float)Player.MaxHealth);
+                    Player.Health += (int)(3f / 4f * Player.MaxHealth);
                     break;
                 case PotionSize.Max:
-                    Player.Health += (int)(4f / 4f * (float)Player.MaxHealth);
+                    Player.Health += (int)(4f / 4f * Player.MaxHealth);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -168,10 +152,7 @@ namespace RPG.Potions
 
         public PotionSize potionSize;
 
-        protected Potion() : this((PotionSize)RandomGenerator.Random.Next(4))
-        {
-
-        }
+        protected Potion() : this((PotionSize)RandomGenerator.Random.Next(4)) { }
 
         protected Potion(PotionSize potionSize)
         {
