@@ -69,6 +69,7 @@ namespace RPG.Extensions
     /// </summary>
     public static class InheritedClassEnumerator
     {
+        //Brugt til at cache statisk data i funktionen nedenunder.
         private static Dictionary<Type, List<string>> listOfStringsCache = new Dictionary<Type, List<string>>();
 
         /// <summary>
@@ -94,6 +95,7 @@ namespace RPG.Extensions
             return objects;
         }
 
+        //Brugt til at cache statisk data i funktionen nedenunder.
         private static Dictionary<Type, List<Type>> listOfTypesCache = new Dictionary<Type, List<Type>>();
 
         /// <summary>
