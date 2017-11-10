@@ -5,7 +5,6 @@ namespace RPG
 {
     static class Program
     {
-        public static Random Random = new Random();
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

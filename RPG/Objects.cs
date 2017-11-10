@@ -40,7 +40,7 @@ namespace RPG.Objects
             {
                 if (EncounterRate != 0)
                 {
-                    if (Program.Random.Next(0, EncounterRate) == 0)
+                    if (RandomGenerator.Random.Next(0, EncounterRate) == 0)
                     {
                         //Start battle
                     }
