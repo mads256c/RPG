@@ -63,11 +63,14 @@ namespace RPG.Extensions
     }
 
     //Kraftigt ændret af mig. Den returnerer ikke længere en klasse. Nu returnerer den en liste af strenge, hvor alle nedavede klassers navner ligger i.
+    //Den har også nu en caching funktion, fordi at reflektion er meget langsomt.
     /// <summary>
     /// Enumererer alle klasser som arver fra den specificerede klasse.
     /// </summary>
     public static class InheritedClassEnumerator
     {
+        private static Dictionary<Type, List<string>> listOfStringsCache = new Dictionary<Type, List<string>>();
+
         /// <summary>
         /// Få en liste af alle klasser der arver fra <see cref="T"/>.
         /// </summary>
@@ -75,14 +78,23 @@ namespace RPG.Extensions
         /// <returns>En liste af klassernes fulde navne.</returns>
         public static List<string> GetListOfStrings<T>() where T : class
         {
+            foreach (var keypair in listOfStringsCache)
+            {
+                if (keypair.Key == typeof(T))
+                    return keypair.Value;
+            }
+
             var objects = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
                 .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T)))
                 .Select(type => type.FullName)
                 .ToList();
             objects.Sort();
+            listOfStringsCache.Add(typeof(T), objects);
             return objects;
         }
+
+        private static Dictionary<Type, List<Type>> listOfTypesCache = new Dictionary<Type, List<Type>>();
 
         /// <summary>
         /// Få en liste af alle klasser der arver fra <see cref="T"/>.
@@ -91,10 +103,17 @@ namespace RPG.Extensions
         /// <returns>En liste af klassernes <see cref="Type"/>.</returns>
         public static List<Type> GetListOfTypes<T>() where T : class
         {
+            foreach (var keypair in listOfTypesCache)
+            {
+                if (keypair.Key == typeof(T))
+                    return keypair.Value;
+            }
+
             var objects = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
                 .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T)))
                 .ToList();
+            listOfTypesCache.Add(typeof(T), objects);
             return objects;
         }
     }
