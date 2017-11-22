@@ -146,6 +146,7 @@ namespace RPG.Extensions
         }
     }
 
+    //Taget fra internettet.
     /// <summary>
     /// En klasse der hjælper med variabler.
     /// </summary>

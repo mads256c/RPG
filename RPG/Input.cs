@@ -36,9 +36,6 @@ namespace RPG
 
         private bool _spacePressed = false;
 
-        /// <summary>
-        /// Denne timer gør sådan at
-        /// </summary>
         private readonly Timer _timer = new Timer
         {
             Interval = 1,

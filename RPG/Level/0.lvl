@@ -28,7 +28,5 @@ RPG.Objects.Key
 20,104,0
 RPG.Objects.Grass
 51,105,170,137,0
-RPG.Objects.Door
-250,370,290,460,0
 RPG.Objects.WeaponChest
 524,395

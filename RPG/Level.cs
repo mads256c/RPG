@@ -69,7 +69,7 @@ namespace RPG
                 {
                     if (levelObject == loadId)
                     {
-                        //Konverterer et string array til it objekt array så det kan bruges senere.
+                        //Konverterer et string array til et objekt array så det kan bruges senere.
                         object[] paramsConvertor = new object[parameters.Length];
                         for (int i = 0; i < paramsConvertor.Length; i++)
                         {

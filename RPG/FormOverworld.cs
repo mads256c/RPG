@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Media;
-using System.Threading;
 using System.Windows.Forms;
-using RPG.Properties;
-using RPG.UI;
 
 namespace RPG
 {
@@ -38,7 +35,7 @@ namespace RPG
         {
             #if DEBUG
                 new FormDebug().Show();
-#endif //DEBUG
+            #endif //DEBUG
             Level.LoadLevel(0);
         }
     }
