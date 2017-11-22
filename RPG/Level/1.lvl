@@ -1,15 +1,18 @@
 Player
-539,105
+568,20
+RPG.Objects.Player
+568,20
 RPG.Objects.Wall
-0,200,100,300
-100,192,135,301
-0,0,100,100
+0,0,600, 20
+RPG.Objects.Wall
+0,20,20, 475
+RPG.Objects.Wall
+20,455,600, 475
+RPG.Objects.Wall
+500,84,600, 387
+RPG.Objects.Wall
+165,169,293, 297
 RPG.Objects.Grass
+20,20,165,455,0
 RPG.Objects.Entrance
-0,100,100,200,2
-RPG.Objects.Door
-100,110,135,191,0
-RPG.Objects.Key
-0,300,50,350,0
-RPG.Objects.Floor
-99,0,134,111,1
+552,387,600,455,2

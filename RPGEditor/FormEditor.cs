@@ -29,7 +29,7 @@ namespace RPGEditor
 
         public static void ClearEditor()
         {
-            foreach (var editorObjectHelper in EditorObjectHelper.EditorObjectHelpers)
+            foreach (var editorObjectHelper in EditorObjectHelper.EditorObjectHelpers.ToArray())
             {
                 editorObjectHelper.RemoveObject();
             }

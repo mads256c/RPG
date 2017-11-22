@@ -45,7 +45,6 @@ namespace RPG.Objects
                         //Start battle
                     }
                 }
-                return true;
             }
             return false;
         }
@@ -141,6 +140,8 @@ namespace RPG.Objects
         }
 
         public Key(int x1, int y1, int x2, int y2, int id) : this(new Point(x1, y1), new Size(x2 - x1, y2 - y1), id) { }
+
+        public Key(int x, int y, int id) : this(new Point(x, y), new Size(32, 32),  id) { }
 
         public override bool IntersectsCollider(Rectangle bounds)
         {

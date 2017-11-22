@@ -36,9 +36,9 @@ namespace RPG
             //For hver linje i filen levelId.lvl. Hvor levelId er levelets nummer.
             foreach (var line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + $@"\Level\{levelId}.lvl"))
             {
-                if (line == "Player")
+                if (line == "RPG.Objects.Player")
                 {
-                    loadId = "Player";
+                    loadId = "RPG.Objects.Player";
                     //Går vidre til næste linje.
                     continue;
                 }
@@ -55,12 +55,13 @@ namespace RPG
 
                 string[] parameters = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (loadId == "Player")
+                if (loadId == "RPG.Objects.Player")
                 {
                     FormOverworld.Instance.Controls.Remove(FormOverworld.OverworldPlayer);
                     FormOverworld.OverworldPlayer = new OverworldPlayer(int.Parse(parameters[0]), int.Parse(parameters[1]));
                     FormOverworld.Instance.Controls.Add(FormOverworld.OverworldPlayer);
                     FormOverworld.OverworldPlayer.BringToFront();
+                    goto end;
                 }
 
                 //For hver klasse der nedarver af LevelObject: Hvis loadId passer med klassens navn lav en ny instans af klassen.

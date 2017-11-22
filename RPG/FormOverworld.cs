@@ -15,7 +15,6 @@ namespace RPG
             InitializeComponent();
             ClientSize = new Size(600, 500);
             Instance = this;
-            Level.LoadLevel(5);
             Controls.Add(OverworldPlayer);
             Input.Instance = new Input(Instance);
         }
@@ -39,7 +38,8 @@ namespace RPG
         {
             #if DEBUG
                 new FormDebug().Show();
-            #endif //DEBUG
+#endif //DEBUG
+            Level.LoadLevel(0);
         }
     }
 }

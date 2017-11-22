@@ -17,7 +17,7 @@ namespace RPG.Objects
         Floor
     }
 
-    public class Player : EditorObjectHelper
+    public sealed class Player : EditorObjectHelper
     {
         public static Player player = null;
 
@@ -36,7 +36,7 @@ namespace RPG.Objects
             player = this;
         }
 
-        public virtual void EditObject()
+        public void EditObject()
         {
             using (FormEditObject formEditObject = new FormEditObject(Location.X, Location.Y, Location.X + Size.Width,
                 Location.Y + Size.Height, null))
@@ -112,6 +112,10 @@ namespace RPG.Objects
             Size = new Size(x2 - x1, y2 - y1);
         }
 
+        public override string GetFileFormat()
+        {
+            return base.GetFileFormat() + $",{Size.Width + Location.X}, {Size.Height + Location.Y}";
+        }
     }
 
     public class Grass : EditorObject
@@ -145,7 +149,7 @@ namespace RPG.Objects
 
         public override string GetFileFormat()
         {
-            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{EncounterRate}";
+            return base.GetFileFormat() + $",{Size.Width + Location.X},{Size.Height + Location.Y},{EncounterRate}";
         }
 
     }
@@ -182,7 +186,7 @@ namespace RPG.Objects
 
         public override string GetFileFormat()
         {
-            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{LevelID}";
+            return base.GetFileFormat() + $",{Size.Width+Location.X},{Size.Height+Location.Y},{LevelID}";
         }
     }
 
@@ -217,7 +221,7 @@ namespace RPG.Objects
 
         public override string GetFileFormat()
         {
-            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{ID}";
+            return base.GetFileFormat() + $",{Size.Width+Location.X},{Size.Height+Location.Y},{ID}";
         }
     }
 
@@ -226,12 +230,12 @@ namespace RPG.Objects
 
         public int ID = 0;
 
-        public Key() : this(0, 0, 128, 128, 0) { }
+        public Key() : this(0, 0, 0) { }
 
-        public Key(int x1, int y1, int x2, int y2, int id)
+        public Key(int x, int y, int id)
         {
-            Location = new Point(x1, y1);
-            Size = new Size(x2 - x1, y2 - y1);
+            Location = new Point(x, y);
+            Size = new Size(32, 32);
             ID = id;
             BackColor = Color.Goldenrod;
         }
@@ -245,7 +249,6 @@ namespace RPG.Objects
                 {
                     var info = formEditObject.FormEditObjectInfo;
                     Location = new Point(info.x1, info.y1);
-                    Size = new Size(info.x2 - info.x1, info.y2 - info.y1);
                     ID = info.ID;
                 }
             }
@@ -253,7 +256,7 @@ namespace RPG.Objects
 
         public override string GetFileFormat()
         {
-            return base.GetFileFormat() + $",{Size.Width},{Size.Height},{ID}";
+            return base.GetFileFormat() + $",{ID}";
         }
     }
 
